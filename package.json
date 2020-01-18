@@ -37,7 +37,8 @@
     "webpack": "^4.8.3",
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.1.4",
-    "webpack-merge": "^4.1.1"
+    "webpack-merge": "^4.1.1",
+    "js-yaml": ">=3.13.1"
   },
   "dependencies": {
     "@material-ui/core": "^4.8.3",
