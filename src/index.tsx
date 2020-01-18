@@ -2,12 +2,15 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import App from './app';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = document.getElementById('app');
 ReactDOM.render(
-	<AppContainer>
-		<App />
-	</AppContainer>,
+	<BrowserRouter>
+		<AppContainer>
+			<App />
+		</AppContainer>
+	</BrowserRouter>,
 	root
 );
 
@@ -17,9 +20,11 @@ if (module.hot) {
 		// tslint:disable-next-line:no-require-imports
 		const HotApp = require('./app').default;
 		ReactDOM.render(
-			<AppContainer>
-				<HotApp />
-			</AppContainer>
+			<BrowserRouter>
+				<AppContainer>
+					<HotApp />
+				</AppContainer>
+			</BrowserRouter>
 			, root
 		);
 	});

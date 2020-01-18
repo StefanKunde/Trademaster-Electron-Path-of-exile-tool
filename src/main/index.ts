@@ -36,6 +36,8 @@ function createMainWindow() {
 		});
 	});
 
+	mainWindow.setMenu(null);
+
 	return mainWindow;
 }
 
