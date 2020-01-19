@@ -8,9 +8,11 @@ let mainWindow: Electron.BrowserWindow;
 
 function createMainWindow() {
 	// Construct new BrowserWindow
-	mainWindow = new BrowserWindow({minHeight: 671, minWidth: 1192, webPreferences: {
-		nodeIntegration: true
-	  }});
+	mainWindow = new BrowserWindow({
+		minHeight: 671, minWidth: 1249, webPreferences: {
+			nodeIntegration: true
+		}
+	});
 
 	// Set url for `win`
 	// points to `webpack-dev-server` in development
