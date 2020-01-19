@@ -23,7 +23,7 @@ class Home extends React.Component<Props, any> {
 
 	render() {
 		return (
-			<div id='home-div'>
+			<div>
 				<div className="card card-pricing bg-primary">
 					<div className="card-body ">
 						<div className="card-icon">
@@ -33,7 +33,7 @@ class Home extends React.Component<Props, any> {
 						<p className="card-description">
 							Inject the TradeMaster into your game. Make sure your game is
 							running!</p>
-						<button id="playnow" className="btn btn-white btn-round">Inject</button>
+						<button id="inject" className="btn btn-white btn-round">Inject</button>
 					</div>
 				</div>
 			</div >
