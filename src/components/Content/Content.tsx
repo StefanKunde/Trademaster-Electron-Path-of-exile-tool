@@ -9,13 +9,15 @@ interface IProps {
 }
 
 class Content extends React.Component<IProps, any> {
-  render() {
-	return (
-		<Router>
-			<Route exact path='/' component={Home} />
-		</Router>
-	);
-  }
+	render() {
+		return (
+			<Router>
+				<div id='home'>
+					<Route exact path='/' component={Home} />
+				</div>
+			</Router>
+		);
+	}
 }
 
 export default Content;

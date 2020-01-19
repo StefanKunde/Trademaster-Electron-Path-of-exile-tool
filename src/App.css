@@ -29,10 +29,17 @@ html, body {
 
 #content {
     height: 85vh;
-    background-color: goldenrod;
+    background-image: url('https://web.poecdn.com/image/layout/delve-bg.jpg'); 
+    background-size: cover;
+}
+
+#home {
+    padding-left: 600px;
+    padding-right: 40px;
+    padding-top: 200px;
 }
 
 #footer {
     height: 5vh;
-    background-color: indianred;
+    background-color: #404747;
 }
