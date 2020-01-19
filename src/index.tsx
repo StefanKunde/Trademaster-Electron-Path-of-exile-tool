@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 const root = document.getElementById('app');
 ReactDOM.render(
+
 	<BrowserRouter>
 		<AppContainer>
 			<App />
@@ -24,8 +25,8 @@ if (module.hot) {
 				<AppContainer>
 					<HotApp />
 				</AppContainer>
-			</BrowserRouter>
-			, root
+			</BrowserRouter>,
+			 root
 		);
 	});
 }
