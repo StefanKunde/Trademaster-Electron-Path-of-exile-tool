@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './NavigationBar.css';
+import { Link } from 'react-router-dom';
 
 export interface IProps {
 }
@@ -26,10 +27,10 @@ export default class NavigationBar extends React.Component<IProps, any> {
 					<div className='collapse navbar-collapse' id='navbarNav'>
 						<ul className='navbar-nav'>
 							<li className='nav-item active'>
-								<a className='nav-link' href='#'>Start</a>
+								<Link className='nav-link' to='/'>Start</Link>
 							</li>
 							<li className='nav-item'>
-								<a className='nav-link' href='#'>Settings</a>
+								<Link className='nav-link' to='/settings'>Settings</Link>
 							</li>
 						</ul>
 					</div>
