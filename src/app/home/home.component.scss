@@ -1,0 +1,19 @@
+:host {
+}
+
+.item-icon-images {
+  cursor: pointer;
+  user-drag: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
+.item-icon-images:hover {
+  background-color: rgb(218, 216, 216);
+}
+
+.selected {
+  background-color: rgb(158, 155, 155);
+  border: 1.5px solid black;
+}

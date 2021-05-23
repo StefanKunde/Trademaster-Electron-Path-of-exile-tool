@@ -1,0 +1,87 @@
+<div class="container">
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <div style="width: 100%">
+      <mat-accordion>
+        <mat-expansion-panel style="width: 100%">
+          <mat-expansion-panel-header>
+            <mat-panel-title> Buy </mat-panel-title>
+            <mat-panel-description>
+              {{
+                selectedBuyItem?.entry?.text
+                  ? selectedBuyItem?.entry?.text
+                  : buySummaryDefaultText
+              }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div fxLayoutGap="10px">
+            <app-item-type-select type="buy"></app-item-type-select>
+            <app-item-select *ngIf="!showBuyIcons" type="buy"></app-item-select>
+            <mat-form-field class="example-form-field">
+              <input matInput type="number" [(ngModel)]="minimumStock" />
+              <mat-label>Minimum stock</mat-label>
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="selectedBuyItemType && showBuyIcons">
+            <span *ngFor="let entry of selectedBuyItemType.entries">
+              <img
+                class="item-icon-images"
+                [src]="entry.image"
+                [title]="entry.text"
+                style="
+                  max-width: 40px;
+                  min-width: 40px;
+                  max-height: 40px;
+                  min-height: 40px;
+                "
+                (click)="selectItem($event, entry, 'buy')"
+              />
+            </span>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div style="width: 100%">
+      <mat-accordion>
+        <mat-expansion-panel style="width: 100%">
+          <mat-expansion-panel-header>
+            <mat-panel-title> Sell </mat-panel-title>
+            <mat-panel-description>
+              {{
+                selectedSellItem?.entry?.text
+                  ? selectedSellItem?.entry?.text
+                  : sellSummaryDefaultText
+              }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <app-item-type-select type="sell"></app-item-type-select>
+          <app-item-select *ngIf="!showSellIcons" type="sell"></app-item-select>
+          <div *ngIf="selectedBuyItemType && showSellIcons">
+            <span *ngFor="let entry of selectedSellItemType.entries">
+              <img
+                class="item-icon-images"
+                [src]="entry.image"
+                [title]="entry.text"
+                style="
+                  max-width: 40px;
+                  min-width: 40px;
+                  max-height: 40px;
+                  min-height: 40px;
+                "
+                (click)="selectItem($event, entry, 'sell')"
+              />
+            </span>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <button
+      mat-button
+      color="accent"
+      style="background-color: white; margin: 20px; width: 50%"
+      (click)="nextOffer()"
+    >
+      Next offer
+    </button>
+  </div>
+</div>
