@@ -17,46 +17,44 @@ require('@electron/remote/main').initialize();
 export let mainWindow: BrowserWindow | null = null;
 
 const trayIcon = path.join(app.getAppPath(), 'dist/assets/icons/favicon-16x16.png');
-const nimage = nativeImage.createFromPath(trayIcon);
+const trayIconImage = nativeImage.createFromPath(trayIcon);
 let tray = null;
-//let appIcon = null;
 
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
 
 const init = (ipcChannels: IpcChannelInterface[]) => {
-  try {
-    app.commandLine.appendSwitch('disable-features', 'OutOfBlinkCors');
-    app.disableHardwareAcceleration();
+  app.commandLine.appendSwitch('disable-features', 'OutOfBlinkCors');
+  app.disableHardwareAcceleration();
 
-    // This method will be called when Electron has finished
-    // initialization and is ready to create browser windows.
-    // Some APIs can only be used after this event occurs.
-    // Added 400 ms to fix the black background issue while using transparent window. More detais at https://github.com/electron/electron/issues/15947
-    app.on('ready', () => setTimeout(createWindow, 800));
+  // This method will be called when Electron has finished
+  // initialization and is ready to create browser windows.
+  // Some APIs can only be used after this event occurs.
+  // Added 400 ms to fix the black background issue while using transparent window. More detais at https://github.com/electron/electron/issues/15947
+  app.on('ready', () => setTimeout(createWindow, 800));
 
-    // Quit when all windows are closed.
-    app.on('window-all-closed', () => {
-      // On OS X it is common for applications and their menu bar
-      // to stay active until the user quits explicitly with Cmd + Q
-      if (process.platform !== 'darwin') {
-        app.quit();
-      }
-    });
-
-    app.on('activate', () => {
-      // On OS X it's common to re-create a window in the app when the
-      // dock icon is clicked and there are no other windows open.
-      if (mainWindow === null) {
-        createWindow();
-      }
-    });
-
-    app.on('window-all-closed', () => {
+  // Quit when all windows are closed.
+  app.on('window-all-closed', () => {
+    // On OS X it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
+    if (process.platform !== 'darwin') {
       app.quit();
-    });
+    }
+  });
 
-    /*
+  app.on('activate', () => {
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (mainWindow === null) {
+      createWindow();
+    }
+  });
+
+  app.on('window-all-closed', () => {
+    app.quit();
+  });
+
+  /*
     autoUpdater.on('update-available', () => {
       mainWindow.webContents.send('update_available');
     });
@@ -64,11 +62,6 @@ const init = (ipcChannels: IpcChannelInterface[]) => {
       mainWindow.webContents.send('update_downloaded');
     });
     */
-
-  } catch (e) {
-    // Catch Error
-    // throw e;
-  }
 
   registerIpcChannels(ipcChannels);
 };
@@ -83,7 +76,7 @@ const createWindow = (): void => {
   mainWindow = createMainWindow(serve);
 
   // init tray
-  tray = new Tray(nimage);
+  tray = new Tray(trayIconImage);
 
   const contextMenu = Menu.buildFromTemplate([
     {
