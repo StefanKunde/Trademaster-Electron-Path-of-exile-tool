@@ -1,0 +1,16 @@
+<mat-form-field>
+  <mat-select [formControl]="itemTypeCtrl" placeholder="ItemType" #singleSelect>
+    <mat-option>
+      <ngx-mat-select-search
+        [formControl]="itemTypeFilterCtrl"
+      ></ngx-mat-select-search>
+    </mat-option>
+
+    <mat-option
+      *ngFor="let itemType of filteredItemTypes | async"
+      [value]="itemType"
+    >
+      {{ itemType.label }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

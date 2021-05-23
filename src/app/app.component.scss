@@ -1,0 +1,22 @@
+:host {
+}
+
+.minimize-icon {
+  align-self: center;
+  -webkit-app-region: no-drag;
+  cursor: pointer;
+
+  :hover {
+    color: orange;
+  }
+}
+
+.close-icon {
+  align-self: center;
+  -webkit-app-region: no-drag;
+  cursor: pointer;
+
+  :hover {
+    color: red;
+  }
+}

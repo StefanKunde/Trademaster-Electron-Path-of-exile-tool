@@ -1,0 +1,23 @@
+<div
+  style="
+    background-color: rgba(0, 0, 0, 0.99);
+    color: white;
+    padding: 5px 5px 1px 5px;
+    height: 6%;
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+  "
+  id="menu"
+  fxLayout="row"
+  fxLayoutAlign="center"
+>
+  <div fxFlex></div>
+  <div fxFlex style="align-self: center">Trademaster</div>
+  <div class="minimize-icon" (click)="hideWindow()">
+    <span class="material-icons" style="margin-top: -6px">minimize</span>
+  </div>
+  <div class="close-icon" (click)="exitApp()">
+    <span class="material-icons">close</span>
+  </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,21 @@
+## 1.1.0 (2021-05-23)
+
+* Add css and html for home, Add stylesheets which will be replaced later ([9de52f1](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/9de52f1))
+* Add Settings page, react routing does not work yet ([fbf5bb9](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/fbf5bb9))
+* Added class for apicalls. Implemented call to get all maps from poeNina with heroku proxy to prevent ([87663a7](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/87663a7))
+* Added project template for electron-react-typescript-hotreload-webpack ([e77ebf0](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/e77ebf0))
+* Create CODE_OF_CONDUCT.md ([c51fa44](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/c51fa44))
+* First version ([30bac6d](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/30bac6d))
+* Implemented redux to the project ([53b36e2](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/53b36e2))
+* Initial commit ([117ac04](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/117ac04))
+* Integrated material-ui and react router. Implemented basic ui template and some empty components. ([17c58af](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/17c58af))
+* Remove home div ([4f91711](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/4f91711))
+* Update min width to show entries in navbar ([f749349](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/f749349))
+* Update README.md ([55bcad1](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/55bcad1))
+* Update README.md ([57b0a02](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/57b0a02))
+* Update README.md ([f5db163](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/f5db163))
+* Update README.md ([54f0f9c](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/54f0f9c))
+* Updated js-yaml for security purpose. ([de386f8](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/de386f8))
+
+
+

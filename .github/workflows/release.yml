@@ -1,0 +1,53 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  # not working :/
+  #publish_on_linux:
+  #  runs-on: ubuntu-18.04
+  #  steps:
+  #    - uses: actions/checkout@v2
+  #    - uses: actions/setup-node@v1
+  #      with:
+  #        node-version: 12
+  #    - name: install required packages
+  #      run: |
+  #        sudo apt-get update
+  #        sudo apt-get install libxtst-dev libpng++-dev
+  #    - name: install dependencies
+  #      run: npm install
+  #    - name: publish
+  #      env:
+  #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #      run: npm run electron:publish
+
+  publish_on_mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12.18.2
+      - name: install dependencies
+        run: npm install
+      - name: publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run electron:publish
+
+  publish_on_win:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@master
+        with:
+          node-version: 12.18.2
+      - name: install dependencies
+        run: npm install
+      - name: publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run electron:publish
