@@ -1,5 +1,18 @@
+## 1.2.0 (2021-05-23)
+
+* added favicon for mac ([ab70f36](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/ab70f36))
+* delete file ([906f594](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/906f594))
+* Fixed wrong favicon size for mac build ([b00a6f3](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/b00a6f3))
+* Update README.md ([ea0cb1f](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/ea0cb1f))
+* Update README.md ([3a64693](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/3a64693))
+* Update README.md ([37b9121](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/37b9121))
+* Update README.md ([bcf5e98](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/bcf5e98))
+
+
+
 ## 1.1.0 (2021-05-23)
 
+* 1.1.0 ([5d5f785](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/5d5f785))
 * Add css and html for home, Add stylesheets which will be replaced later ([9de52f1](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/9de52f1))
 * Add Settings page, react routing does not work yet ([fbf5bb9](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/fbf5bb9))
 * Added class for apicalls. Implemented call to get all maps from poeNina with heroku proxy to prevent ([87663a7](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/87663a7))
