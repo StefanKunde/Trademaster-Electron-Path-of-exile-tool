@@ -1,5 +1,6 @@
 ## 1.2.0 (2021-05-23)
 
+* 1.2.0 ([0d091bf](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/0d091bf))
 * added favicon for mac ([ab70f36](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/ab70f36))
 * delete file ([906f594](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/906f594))
 * Fixed wrong favicon size for mac build ([b00a6f3](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/b00a6f3))
