@@ -5,7 +5,7 @@ To show the window after hiding type CommandOrControl+Q or click show option fro
 
 Working for Ultimatium, but still missing some key features.
 Currently working on windows (tested) and mac (should, but did not test)
-For setup files go the release page.
+For setup files go the release page (https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/releases).
 
 Working features:
 - Auto update (on restart app)
