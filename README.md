@@ -7,4 +7,25 @@ Working for Ultimatium, but still missing some key features.
 Currently working on windows (tested) and mac (should, but did not test)
 For setup files go the release page.
 
+Working features:
+- Auto update (on restart app)
+- Bulk buys/sells
+- Minimizing / resizing
+- Show app after minimize via tray or CommandOrControl+Q
+- Send trademessage by button click
+- Buy currency
+- Buy prophecies
+- Buy Cards
+- Buy fossils/resos
+- Buy fragments
+- Buy scarabs
+- Buy essences
+- Buy maps (all tiers, blighted and uniques)
+
+Missing features -> under development:
+- League selection (currently only softcore in current league is working)
+- Set max price per item
+- Add map search filter ( influences, enchantments, ...) 
+- Many more...
+
 This is a totaly rework and redesign with the same, new and better features for my tool (https://github.com/StefanKunde/TradeMaster_POE) with electron.
