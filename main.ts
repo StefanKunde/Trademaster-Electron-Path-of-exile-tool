@@ -1,16 +1,17 @@
-import { app, BrowserWindow, screen, ipcMain, globalShortcut, Tray } from 'electron';
+import { app, BrowserWindow, ipcMain, globalShortcut, Tray } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import * as fs from 'fs';
 import * as robotjs from 'robotjs';
 import { createMainWindow } from './main-process/main-window';
-import { IpcChannelInterface } from './main-process/ipc/ipcChannelInterface';
-import { HideWindowChannel } from './main-process/ipc/hideWindowChannel';
-import { ExitAppChannel } from './main-process/ipc/exitAppChannel';
-import { SendTradeMessageChannel } from './main-process/ipc/sendTradeMessageChannel';
 import { autoUpdater } from 'electron-updater';
 import { Menu } from 'electron/main';
 import { nativeImage } from 'electron/common';
+import { IpcChannelInterface } from './main-process/ipc/ipc-channel.interface';
+import { HideWindowChannel } from './main-process/ipc/hide-window.channel';
+import { ExitAppChannel } from './main-process/ipc/exit-app.channel';
+import { SendTradeMessageChannel } from './main-process/ipc/send-trade-message.channel';
+import { RestartAppAndUpdateChannel } from './main-process/ipc/restart-app-update.channel';
 
 // Initialize remote module
 require('@electron/remote/main').initialize();
@@ -54,14 +55,14 @@ const init = (ipcChannels: IpcChannelInterface[]) => {
     app.quit();
   });
 
-  /*
-    autoUpdater.on('update-available', () => {
-      mainWindow.webContents.send('update_available');
-    });
-    autoUpdater.on('update-downloaded', () => {
-      mainWindow.webContents.send('update_downloaded');
-    });
-    */
+
+  autoUpdater.on('update-available', () => {
+    mainWindow.webContents.send('update_available');
+  });
+  autoUpdater.on('update-downloaded', () => {
+    mainWindow.webContents.send('update_downloaded');
+  });
+
 
   registerIpcChannels(ipcChannels);
 };
@@ -70,12 +71,7 @@ const registerIpcChannels = (ipcChannels: IpcChannelInterface[]) => {
   ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, request) => channel.handle(event, request)));
 };
 
-const createWindow = (): void => {
-
-  // Create the browser window.
-  mainWindow = createMainWindow(serve);
-
-  // init tray
+const createTrayMenu = (): void => {
   tray = new Tray(trayIconImage);
 
   const contextMenu = Menu.buildFromTemplate([
@@ -91,10 +87,13 @@ const createWindow = (): void => {
     }
   ]);
   tray.setContextMenu(contextMenu);
+};
 
-  mainWindow.once('ready-to-show', () => {
-    autoUpdater.checkForUpdatesAndNotify();
-  });
+const createWindow = (): void => {
+
+  // Create the browser window.
+  mainWindow = createMainWindow(serve);
+  createTrayMenu();
 
   mainWindow.on('close', function () {
     app.quit();
@@ -108,12 +107,17 @@ const createWindow = (): void => {
     mainWindow = null;
   });
 
+  mainWindow.once('ready-to-show', () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  });
+
   globalShortcut.register('CommandOrControl+Q', () => {
     mainWindow.show();
   });
 };
 
 init([
+  new RestartAppAndUpdateChannel(),
   new HideWindowChannel(),
   new ExitAppChannel(),
   new SendTradeMessageChannel()
