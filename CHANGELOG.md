@@ -1,3 +1,12 @@
+## 1.3.0 (2021-05-24)
+
+* Added channels and ui for auto update ([fc63842](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/fc63842))
+* Added tray icon ([5a1bfd6](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/5a1bfd6))
+* update ([ee5e864](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/ee5e864))
+* Update FUNDING.yml ([2c4e9dd](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/2c4e9dd))
+
+
+
 ## 1.2.0 (2021-05-23)
 
 * 1.2.0 ([0d091bf](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/0d091bf))
