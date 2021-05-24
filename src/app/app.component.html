@@ -11,20 +11,19 @@
   fxLayout="row"
   fxLayoutAlign="center"
 >
-  <div fxFlex></div>
-  <div fxFlex style="align-self: center">Trademaster</div>
+  <div class="home-icon" (click)="showHomePage()">
+    <span class="material-icons" style="font-size: 15px">home</span>
+  </div>
+  <div class="settings-icon" (click)="showSettingsPage()">
+    <span class="material-icons" style="font-size: 15px">settings</span>
+  </div>
+  <div fxFlex style="align-self: center"></div>
+  <div fxFlex>Trademaster</div>
   <div class="minimize-icon" (click)="hideWindow()">
     <span class="material-icons" style="margin-top: -6px">minimize</span>
   </div>
   <div class="close-icon" (click)="exitApp()">
     <span class="material-icons">close</span>
   </div>
-</div>
-<div id="notification" class="hidden">
-  <p id="message"></p>
-  <button id="close-button" onClick="closeNotification()">Close</button>
-  <button id="restart-button" onClick="restartApp()" class="hidden">
-    Restart
-  </button>
 </div>
 <router-outlet></router-outlet>

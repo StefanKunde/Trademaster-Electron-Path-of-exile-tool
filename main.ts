@@ -19,7 +19,7 @@ export let mainWindow: BrowserWindow | null = null;
 
 const trayIcon = path.join(app.getAppPath(), 'dist/assets/icons/favicon-16x16.png');
 const trayIconImage = nativeImage.createFromPath(trayIcon);
-let tray = null;
+let tray: Tray = null;
 
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
@@ -87,6 +87,8 @@ const createTrayMenu = (): void => {
     }
   ]);
   tray.setContextMenu(contextMenu);
+  tray.setToolTip('PoE-Trademaster');
+
 };
 
 const createWindow = (): void => {

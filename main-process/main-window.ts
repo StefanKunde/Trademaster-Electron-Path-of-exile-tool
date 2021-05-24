@@ -7,8 +7,10 @@ export const createMainWindow = (serve: boolean): BrowserWindow => {
   const win = new BrowserWindow({
     maxWidth: 800,
     maxHeight: 600,
-    minHeight: 400,
+    minHeight: 250,
     minWidth: 300,
+    width: 300,
+    height: 250,
     ...overlayWindow.WINDOW_OPTS,
     webPreferences: {
       nodeIntegration: true,

@@ -3,6 +3,7 @@ import { ElectronService } from './core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { ItemSelectionService } from './core/services/itemSelection/itemSelectionService';
 import { ApiService } from './core/services/api/apiService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit {
     private electronService: ElectronService,
     private translate: TranslateService,
     private apiService: ApiService,
-    private itemSelectionService: ItemSelectionService
+    private itemSelectionService: ItemSelectionService,
+    private router: Router
   ) {
     this.translate.setDefaultLang('en');
   }
@@ -30,17 +32,18 @@ export class AppComponent implements OnInit {
     this.electronService.exitApp();
   }
 
+  public showHomePage(): void {
+    this.router.navigateByUrl('/home');
+  }
+
+  public showSettingsPage(): void {
+    this.router.navigateByUrl('/settings');
+  }
+
+
+
   public async initializeItemTypes(): Promise<void> {
     const itemTypes = await this.apiService.getPoeBulkItemData();
     this.itemSelectionService.setItemTypes(itemTypes);
-  }
-
-  public closeNotification(): void {
-    const notification = document.getElementById('notification');
-    notification.classList.add('hidden');
-  }
-
-  public restartApp(): void {
-    this.electronService.restartApp();
   }
 }

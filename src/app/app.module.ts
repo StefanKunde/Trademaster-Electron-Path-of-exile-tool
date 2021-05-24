@@ -15,6 +15,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 // Custom
 import { HomeModule } from './home/home.module';
 import { AppComponent } from './app.component';
+import { SettingsModule } from './pages/settings/settings.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -32,6 +33,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     CoreModule,
     SharedModule,
     HomeModule,
+    SettingsModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {
