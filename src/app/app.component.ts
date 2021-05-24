@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectronService } from './core/services';
 import { TranslateService } from '@ngx-translate/core';
-import { AppConfig } from '../environments/environment';
 import { ItemSelectionService } from './core/services/itemSelection/itemSelectionService';
 import { ApiService } from './core/services/api/apiService';
 
@@ -18,16 +17,6 @@ export class AppComponent implements OnInit {
     private itemSelectionService: ItemSelectionService
   ) {
     this.translate.setDefaultLang('en');
-    console.log('AppConfig', AppConfig);
-
-    if (this.electronService.isElectron) {
-      console.log(process.env);
-      console.log('Run in electron');
-      console.log('Electron ipcRenderer', this.electronService.ipcRenderer);
-      console.log('NodeJS childProcess', this.electronService.childProcess);
-    } else {
-      console.log('Run in browser');
-    }
   }
   ngOnInit(): void {
     this.initializeItemTypes();
@@ -44,5 +33,14 @@ export class AppComponent implements OnInit {
   public async initializeItemTypes(): Promise<void> {
     const itemTypes = await this.apiService.getPoeBulkItemData();
     this.itemSelectionService.setItemTypes(itemTypes);
+  }
+
+  public closeNotification(): void {
+    const notification = document.getElementById('notification');
+    notification.classList.add('hidden');
+  }
+
+  public restartApp(): void {
+    this.electronService.restartApp();
   }
 }

@@ -6,6 +6,7 @@ import { ipcRenderer, webFrame } from 'electron';
 import * as remote from '@electron/remote';
 import * as childProcess from 'child_process';
 import * as fs from 'fs';
+import { BehaviorSubject } from 'rxjs';
 
 interface IpcRequest {
   responseChannel?: string;
@@ -16,11 +17,13 @@ interface IpcRequest {
   providedIn: 'root'
 })
 export class ElectronService {
-  ipcRenderer: typeof ipcRenderer;
-  webFrame: typeof webFrame;
-  remote: typeof remote;
-  childProcess: typeof childProcess;
-  fs: typeof fs;
+  private ipcRenderer: typeof ipcRenderer;
+  private webFrame: typeof webFrame;
+  private remote: typeof remote;
+  private childProcess: typeof childProcess;
+  private fs: typeof fs;
+
+  public updateAvailableSubject = new BehaviorSubject<string[]>([]);
 
   get isElectron(): boolean {
     return !!(window && window.process && window.process.type);
@@ -38,7 +41,42 @@ export class ElectronService {
 
       this.childProcess = window.require('child_process');
       this.fs = window.require('fs');
+
+      this.initListener();
     }
+  }
+
+  private initListener() {
+    /*
+    this.ipcRenderer.on('update_available', (event, data) => {
+      this.updateAvailableSubject.next(data);
+    });
+    */
+
+
+    // Handle auto update
+    const notification = document.getElementById('notification');
+    const message = document.getElementById('message');
+    const restartButton = document.getElementById('restart-button');
+    this.ipcRenderer.on('update_available', () => {
+      this.ipcRenderer.removeAllListeners('update_available');
+      message.innerText = 'A new update is available. Downloading now...';
+      notification.classList.remove('hidden');
+    });
+    this.ipcRenderer.on('update_downloaded', () => {
+      this.ipcRenderer.removeAllListeners('update_downloaded');
+      message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
+      restartButton.classList.remove('hidden');
+      notification.classList.remove('hidden');
+    });
+  }
+
+  public restartApp(): Promise<void> {
+    const request: IpcRequest = {
+      params: []
+    };
+
+    return this.send<void>('restart_app', request);
   }
 
   public hideWindow(): Promise<void> {

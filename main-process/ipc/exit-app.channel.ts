@@ -1,5 +1,5 @@
-import { IpcChannelInterface, IpcRequest } from "./IpcChannelInterface";
-import { app, IpcMainEvent } from 'electron';
+import { IpcChannelInterface, IpcRequest } from "./ipc-channel.interface";
+import { IpcMainEvent } from 'electron';
 import { mainWindow } from "../../main";
 
 export class ExitAppChannel implements IpcChannelInterface {
@@ -17,7 +17,7 @@ export class ExitAppChannel implements IpcChannelInterface {
       mainWindow.close();
     }
 
-    // We dont need to send back when closing.
+    // We don't need to send back when closing.
     // event.sender.send(request.responseChannel, {});
   }
 }

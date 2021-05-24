@@ -1,5 +1,5 @@
 
-import { IpcChannelInterface, IpcRequest } from "./IpcChannelInterface";
+import { IpcChannelInterface, IpcRequest } from "./ipc-channel.interface";
 import { clipboard, IpcMainEvent } from 'electron';
 import * as robotjs from 'robotjs';
 import { overlayWindow } from 'electron-overlay-window';

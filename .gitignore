@@ -12,6 +12,8 @@ src/**/*.js
 *.js.map
 main-process/**/*.js
 main-process/**/*.js.map
+main-process/*.js
+main-process/*.js.map
 
 # dependencies
 /node_modules

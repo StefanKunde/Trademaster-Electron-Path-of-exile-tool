@@ -1,4 +1,4 @@
-import { IpcChannelInterface, IpcRequest } from "./IpcChannelInterface";
+import { IpcChannelInterface, IpcRequest } from "./ipc-channel.interface";
 import { IpcMainEvent } from 'electron';
 import { mainWindow } from "../../main";
 
