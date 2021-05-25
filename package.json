@@ -54,6 +54,7 @@
     "@electron/remote": "1.0.4",
     "axios": "0.19.2",
     "electron-overlay-window": "2.0.1",
+    "electron-settings": "4.0.2",
     "electron-updater": "4.3.9",
     "ngx-mat-select-search": "3.2.0",
     "node-cache": "5.1.2",

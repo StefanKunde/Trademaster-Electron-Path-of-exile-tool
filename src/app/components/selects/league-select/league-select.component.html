@@ -1,0 +1,25 @@
+<!--
+  <mat-form-field>
+  <mat-select
+    [value]="selected"
+    [formControl]="leagueCtrl"
+    placeholder="League"
+  >
+    <mat-option *ngFor="let item of items" [value]="item">
+      {{ item }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+!-->
+
+<mat-form-field style="width: 100%">
+  <mat-label>League selection</mat-label>
+  <mat-select
+    [value]="selected?.id"
+    (selectionChange)="selectionChange($event)"
+  >
+    <mat-option *ngFor="let item of items" [value]="item.id">{{
+      item.id
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>

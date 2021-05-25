@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as url from 'url';
 import * as fs from 'fs';
 import * as robotjs from 'robotjs';
+import * as settings from 'electron-settings';
 import { createMainWindow } from './main-process/main-window';
 import { autoUpdater } from 'electron-updater';
 import { Menu } from 'electron/main';
@@ -12,6 +13,8 @@ import { HideWindowChannel } from './main-process/ipc/hide-window.channel';
 import { ExitAppChannel } from './main-process/ipc/exit-app.channel';
 import { SendTradeMessageChannel } from './main-process/ipc/send-trade-message.channel';
 import { RestartAppAndUpdateChannel } from './main-process/ipc/restart-app-update.channel';
+import { loadSettings } from './main-process/settings/settings';
+import { SaveUserSettingsChannel } from './main-process/ipc/save-usersettings.channel';
 
 // Initialize remote module
 require('@electron/remote/main').initialize();
@@ -32,7 +35,7 @@ const init = (ipcChannels: IpcChannelInterface[]) => {
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
   // Added 400 ms to fix the black background issue while using transparent window. More detais at https://github.com/electron/electron/issues/15947
-  app.on('ready', () => setTimeout(createWindow, 800));
+  app.on('ready', () => setTimeout(initApp, 800));
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
@@ -47,7 +50,7 @@ const init = (ipcChannels: IpcChannelInterface[]) => {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
-      createWindow();
+      initApp();
     }
   });
 
@@ -91,11 +94,19 @@ const createTrayMenu = (): void => {
 
 };
 
-const createWindow = (): void => {
+function initApp() {
 
   // Create the browser window.
   mainWindow = createMainWindow(serve);
   createTrayMenu();
+
+  mainWindow.webContents.on('did-finish-load', function () {
+    loadSettings().then(settings => {
+      mainWindow.webContents.send('loaded_user_settings', settings);
+    });
+  });
+
+
 
   mainWindow.on('close', function () {
     app.quit();
@@ -116,12 +127,13 @@ const createWindow = (): void => {
   globalShortcut.register('CommandOrControl+Q', () => {
     mainWindow.show();
   });
-};
+}
 
 init([
   new RestartAppAndUpdateChannel(),
   new HideWindowChannel(),
   new ExitAppChannel(),
-  new SendTradeMessageChannel()
+  new SendTradeMessageChannel(),
+  new SaveUserSettingsChannel()
 ]);
 

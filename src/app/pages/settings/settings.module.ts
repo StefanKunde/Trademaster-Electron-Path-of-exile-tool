@@ -7,9 +7,11 @@ import { MatInputModule } from '@angular/material/input';
 import { SettingsComponent } from './settings.component';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SharedModule } from '../../shared/shared.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { GeneralModule } from './general/general.module';
 
 @NgModule({
   declarations: [SettingsComponent],
-  imports: [CommonModule, SharedModule, SettingsRoutingModule, FlexLayoutModule, MatExpansionModule, MatButtonModule, MatInputModule]
+  imports: [CommonModule, SharedModule, SettingsRoutingModule, FlexLayoutModule, MatExpansionModule, MatButtonModule, MatInputModule, MatSidenavModule, GeneralModule]
 })
 export class SettingsModule { }
