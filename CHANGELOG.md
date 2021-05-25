@@ -1,3 +1,13 @@
+## 1.4.0 (2021-05-25)
+
+* Added settings page. Added support to select different leagues. ([a26e1e7](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/a26e1e7))
+* Implemented routing for settingspage and added icon buttons for it. Cleaned some code. ([a74b900](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/a74b900))
+* Modified changelog ([3df6c8d](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/3df6c8d))
+* Update README.md ([c668535](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/c668535))
+* Update README.md ([bd19408](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/bd19408))
+
+
+
 ## 1.3.0 (2021-05-24)
 
 * 1.3.0 ([49828b9](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/49828b9))
