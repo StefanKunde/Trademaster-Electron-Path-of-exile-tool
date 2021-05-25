@@ -9,6 +9,7 @@ For setup files go the release page (https://github.com/StefanKunde/Trademaster-
 
 Working features:
 - Auto update (on restart app)
+- League selection
 - Bulk buys/sells
 - Minimizing / resizing
 - Show app after minimize via tray or CommandOrControl+Q
@@ -23,7 +24,6 @@ Working features:
 - Buy maps (all tiers, blighted and uniques)
 
 Missing features -> under development:
-- League selection (currently only softcore in current league is working)
 - Set max price per item
 - Add map search filter ( influences, enchantments, ...) 
 - Many more...
