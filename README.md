@@ -4,7 +4,7 @@ Trademaster is an overlay tool for the game Path of exile with functions to give
 To show the window after hiding type CommandOrControl+Q or click show option from the tray.
 
 Working for Ultimatium, but still missing some key features.
-Currently working on windows (tested) and mac (should, but did not test)
+Currently working on windows (tested) and mac (should, but did not test).
 For setup files go the release page (https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/releases).
 
 Working features:
