@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 
 interface IpcRequest {
   responseChannel?: string;
-  params?: string[];
+  params?: any[];
 }
 
 @Injectable({
@@ -24,6 +24,8 @@ export class ElectronService {
   private fs: typeof fs;
 
   public updateAvailableSubject = new BehaviorSubject<string[]>([]);
+  public loadedSettingsSubject$ = new BehaviorSubject<any>(null);
+  public loadedSettings$ = this.loadedSettingsSubject$.asObservable();
 
   get isElectron(): boolean {
     return !!(window && window.process && window.process.type);
@@ -47,27 +49,10 @@ export class ElectronService {
   }
 
   private initListener() {
-    /*
-    this.ipcRenderer.on('update_available', (event, data) => {
-      this.updateAvailableSubject.next(data);
-    });
-    */
-
-
-    // Handle auto update
-    const notification = document.getElementById('notification');
-    const message = document.getElementById('message');
-    const restartButton = document.getElementById('restart-button');
-    this.ipcRenderer.on('update_available', () => {
-      this.ipcRenderer.removeAllListeners('update_available');
-      message.innerText = 'A new update is available. Downloading now...';
-      notification.classList.remove('hidden');
-    });
-    this.ipcRenderer.on('update_downloaded', () => {
-      this.ipcRenderer.removeAllListeners('update_downloaded');
-      message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
-      restartButton.classList.remove('hidden');
-      notification.classList.remove('hidden');
+    this.ipcRenderer.once('loaded_user_settings', (event, args: any) => {
+      if (args) {
+        this.loadedSettingsSubject$.next(args);
+      }
     });
   }
 
@@ -101,6 +86,14 @@ export class ElectronService {
     };
 
     return this.send<void>('sendTradeMessage', request);
+  }
+
+  public saveSettings(settings: any): Promise<void> {
+    const request: IpcRequest = {
+      params: [settings]
+    };
+
+    return this.send<void>('save_user_settings', request);
   }
 
   public send<T>(channel: string, request: IpcRequest): Promise<T> {

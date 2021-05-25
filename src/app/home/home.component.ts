@@ -3,9 +3,11 @@ import { takeUntil } from 'rxjs/operators';
 import TradeHandler from '../core/handler/trade-handler';
 import { ApiService } from '../core/services/api/apiService';
 import { ItemEntry, ItemType } from '../core/services/api/interfaces/PoeBulkItemData';
+import { LeagueData } from '../core/services/api/interfaces/PoeLeagueData';
 import { CacheService } from '../core/services/cache/cacheService';
 import { ElectronService } from '../core/services/electron/electron.service';
 import { ItemSelectionService } from '../core/services/itemSelection/itemSelectionService';
+import { LeagueSelectionService } from '../core/services/leagueSelection/leagueSelectionService';
 import { DisposableComponent } from '../disposable-component';
 
 @Component({
@@ -23,12 +25,14 @@ export class HomeComponent extends DisposableComponent implements OnInit {
   public minimumStock = 1;
   public showBuyIcons = false;
   public showSellIcons = false;
+  public selectedLeague: LeagueData;
 
   constructor(
     private readonly itemSelectionService: ItemSelectionService,
     private readonly apiService: ApiService,
     private readonly cacheService: CacheService,
-    private readonly electronService: ElectronService
+    private readonly electronService: ElectronService,
+    private readonly leagueSelectionService: LeagueSelectionService
   ) {
     super();
   }
@@ -58,6 +62,12 @@ export class HomeComponent extends DisposableComponent implements OnInit {
       .pipe(takeUntil(this.disposed))
       .subscribe((selectedSellItem) => {
         this.selectedSellItem = selectedSellItem;
+      });
+
+    this.leagueSelectionService.selectedLeague$
+      .pipe(takeUntil(this.disposed))
+      .subscribe((league) => {
+        this.selectedLeague = league;
       });
   }
 
@@ -102,22 +112,22 @@ export class HomeComponent extends DisposableComponent implements OnInit {
 
   public async nextOffer(): Promise<void> {
     let nextOffer: string;
-    if (this.cacheService.has('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id) && this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id).minimumStock === this.minimumStock) {
+    if (this.cacheService.has('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id) && this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id).minimumStock === this.minimumStock) {
       console.log('has cache!');
-      const trandHandlerCached = this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id);
-      nextOffer = await trandHandlerCached.getNextTradeWhisper();
-      this.cacheService.set('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id, trandHandlerCached);
+      const tradeHandlerCached = this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id);
+      nextOffer = await tradeHandlerCached.getNextTradeWhisper();
+      this.cacheService.set('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id, tradeHandlerCached);
 
-      if (this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id).resultIds.length <= 0) {
-        this.cacheService.remove('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id);
+      if (this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id).resultIds.length <= 0) {
+        this.cacheService.remove('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id);
       }
 
     } else {
       console.log('has no cache!');
-      const tradeSearchDataResponse = await this.apiService.getPoeTradeSearchRequestResult(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock);
+      const tradeSearchDataResponse = await this.apiService.getPoeTradeSearchRequestResult(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, this.selectedLeague?.id);
       const tradeHandler = new TradeHandler(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, tradeSearchDataResponse);
       nextOffer = await tradeHandler.getNextTradeWhisper();
-      this.cacheService.set('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id, tradeHandler);
+      this.cacheService.set('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id, tradeHandler);
     }
     console.log('nextOffers: ', nextOffer);
     this.electronService.sendTradeMessage(nextOffer);

@@ -1,0 +1,13 @@
+<div style="text-align: center; background-color: lightgrey">Settings</div>
+<mat-drawer-container class="settings-container">
+  <mat-drawer mode="side" opened style="width: 15%; min-width: 80px">
+    <div *ngFor="let item of menuItems">
+      <div class="settings-item" [routerLinkActive]="['settings-item-active']">
+        <a class="settings-item" [routerLink]="item.path">{{ item.name }}</a>
+      </div>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
