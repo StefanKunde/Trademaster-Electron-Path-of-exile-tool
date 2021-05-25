@@ -1,4 +1,4 @@
-# Trademaster-Electron (Ultimatum) [Under development]
+# Trademaster-Electron (Ultimatum) [Ready to use but still under development]
 Trademaster is an overlay tool for the game Path of exile with functions to give the player better trading experience.
 
 To show the window after hiding type CommandOrControl+Q or click show option from the tray.
