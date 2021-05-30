@@ -10,6 +10,8 @@ import { NextOfferDisplayComponent } from './next-offer-display.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 
 @NgModule({
   declarations: [NextOfferDisplayComponent],
@@ -19,7 +21,8 @@ import { MatSliderModule } from '@angular/material/slider';
     NgxMatSelectSearchModule,
     MatCardModule,
     MatButtonModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSlideToggleModule
   ],
   exports: [NextOfferDisplayComponent]
 })

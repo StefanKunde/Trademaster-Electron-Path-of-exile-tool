@@ -8,6 +8,14 @@
   </mat-card-subtitle>
   <mat-card-content>
     <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+      <mat-slide-toggle
+        [color]="color"
+        [checked]="hasCleanPrices"
+        (change)="cleanPricesHandler($event)"
+        *ngIf="hasCleanPricesOption"
+      >
+        Cleaner prices
+      </mat-slide-toggle>
       <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center">
         <div color="green">
           <span> {{ sliderValue }} </span>

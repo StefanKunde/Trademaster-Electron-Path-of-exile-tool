@@ -32,6 +32,8 @@ export class NextOfferDisplayComponent extends DisposableComponent implements On
   public sliderSteps: number;
   public hasMoreResults: boolean;
   public infoContent = "No available trades";
+  public hasCleanPrices: boolean;
+  public hasCleanPricesOption: boolean;
 
   public currentSellAmount: number;
   public currentBuyAmount: number;
@@ -42,6 +44,7 @@ export class NextOfferDisplayComponent extends DisposableComponent implements On
     private readonly cacheService: CacheService, private readonly apiService: ApiService,
     private readonly electronService: ElectronService, private readonly itemSelectionService: ItemSelectionService, private readonly leagueSelectionService: LeagueSelectionService) {
     super();
+    this.hasCleanPricesOption = true;
   }
 
   private ngOnChanges(changes: any) {
@@ -67,6 +70,12 @@ export class NextOfferDisplayComponent extends DisposableComponent implements On
       this.sliderValue = this.currentTradeHandler.minimumStock;
       this.lastPassedSliderVal = this.sliderValue;
       this.minimumStock = this.currentTradeHandler.minimumStock;
+
+      if (this.selectedSellItem?.entry?.id === 'exalted') {
+        this.hasCleanPricesOption = false;
+      } else {
+        this.hasCleanPricesOption = true;
+      }
 
       this.calculateCleanSteps();
     } else {
@@ -99,7 +108,14 @@ export class NextOfferDisplayComponent extends DisposableComponent implements On
   public setSlidervalue(event: any): void {
     if (event.value % this.sliderSteps === 0) {
       this.sliderValue = event.value;
-      this.currentSellAmount = Number((this.sliderValue / this.currentPriceForOne).toFixed(2));
+      console.log('this.hasCleanPrices: ', this.hasCleanPrices);
+      if (this.hasCleanPrices && !(this.selectedBuyItem.entry.id === 'chaos' && this.selectedSellItem.entry.id === 'exalted')) {
+        this.currentSellAmount = Math.round(Number((this.sliderValue / this.currentPriceForOne)));
+        console.log('this.currentSellAmount: ', this.currentSellAmount);
+      } else {
+        this.currentSellAmount = Number((this.sliderValue / this.currentPriceForOne).toFixed(2));
+      }
+
       this.lastPassedSliderVal = this.sliderValue;
     } else {
       this.sliderValue = this.lastPassedSliderVal;
@@ -131,7 +147,21 @@ export class NextOfferDisplayComponent extends DisposableComponent implements On
         }
       }
     }
+  }
 
+  public cleanPricesHandler(event: any): void {
+    this.hasCleanPrices = event.checked;
+    if (this.hasCleanPrices) {
+      if (!(this.selectedBuyItem.entry.id === 'chaos' && this.selectedSellItem.entry.id === 'exalted')) {
+        if (this.currentSellAmount % 1 * 10 < 1 || this.currentSellAmount % 1 * 10 > 9) {
+          this.currentSellAmount = Math.round(Number((this.sliderValue / this.currentPriceForOne)));
+        } else {
+          this.currentSellAmount = Number((this.sliderValue / this.currentPriceForOne).toFixed(1));
+        }
+      }
+    } else {
+      this.currentSellAmount = Number((this.sliderValue / this.currentPriceForOne).toFixed(2));
+    }
   }
 
   public async sendOffer() {
