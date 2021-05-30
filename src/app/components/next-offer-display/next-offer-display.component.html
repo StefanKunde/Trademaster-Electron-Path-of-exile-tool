@@ -9,7 +9,6 @@
   <mat-card-content>
     <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
       <mat-slide-toggle
-        [color]="color"
         [checked]="hasCleanPrices"
         (change)="cleanPricesHandler($event)"
         *ngIf="hasCleanPricesOption"
