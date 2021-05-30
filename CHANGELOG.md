@@ -1,3 +1,15 @@
+## 1.5.0 (2021-05-30)
+
+* Implemented infobox and added tradeables to it. ([53f95f6](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/53f95f6))
+* Update README.md ([0060f50](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/0060f50))
+* Update README.md ([0d3abfa](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/0d3abfa))
+* Update README.md ([e8cab65](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/e8cab65))
+* Update README.md ([2a89941](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/2a89941))
+* Update README.md ([70b65dd](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/70b65dd))
+* Updated changelog ([f750b96](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/f750b96))
+
+
+
 ## 1.4.0 (2021-05-25)
 
 * 1.4.0 ([4767cd4](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/4767cd4))
