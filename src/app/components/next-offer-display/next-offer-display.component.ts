@@ -55,7 +55,7 @@ export class NextOfferDisplayComponent extends DisposableComponent implements On
 
   private initValues(): void {
     let currentResult: PoeItemResult;
-    if (this.currentTradeHandler?.currentResults?.length > 0) {
+    if (this.currentTradeHandler?.resultIds?.length > 0) {
       this.hasMoreResults = true;
       currentResult = this.currentTradeHandler.currentResult;
       this.buyItemImage = currentResult.item.icon;

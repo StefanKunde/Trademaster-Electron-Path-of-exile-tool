@@ -40,24 +40,18 @@ export default class TradeHandler {
     const currentResult = this.currentResults.shift();
     this.currentResults = this.currentResults.slice(1, this.currentResults.length);
 
-    console.log('currentResult: ', currentResult);
-
     return this.calculatePrices(currentResult);
   }
 
   public async prepareNextTrade(): Promise<void> {
-    if (this.currentResults.length <= 0) {
+    if (this.currentResults.length <= 0 && this.resultIds.length > 0) {
       const nextTradeResults = await this.getNextTradeResults();
       this.currentResults = nextTradeResults.result;
     }
 
-    if (this.currentResults.length <= 0) {
-      this.currentResult = null;
-
-    }
     const currentResult = this.currentResults.shift();
     this.currentResult = currentResult;
-    this.currentResults = this.currentResults.slice(1, this.currentResults.length);
+    this.resultIds = this.resultIds.slice(1, this.resultIds.length);
     this.calculatePrices(this.currentResult);
   }
 
