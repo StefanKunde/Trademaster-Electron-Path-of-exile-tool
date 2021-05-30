@@ -9,9 +9,10 @@ import { HomeComponent } from './home.component';
 import { SharedModule } from '../shared/shared.module';
 import { ItemTypeSelectModule } from '../components/selects/item-type-select/item-type-select.module';
 import { ItemSelectModule } from '../components/selects/item-select/item-select.module';
+import { NextOfferDisplayModule } from '../components/next-offer-display/next-offer-display.module';
 
 @NgModule({
   declarations: [HomeComponent],
-  imports: [CommonModule, SharedModule, HomeRoutingModule, FlexLayoutModule, MatExpansionModule, MatButtonModule, MatInputModule, ItemTypeSelectModule, ItemSelectModule]
+  imports: [CommonModule, SharedModule, HomeRoutingModule, FlexLayoutModule, MatExpansionModule, MatButtonModule, MatInputModule, ItemTypeSelectModule, ItemSelectModule, NextOfferDisplayModule]
 })
 export class HomeModule { }

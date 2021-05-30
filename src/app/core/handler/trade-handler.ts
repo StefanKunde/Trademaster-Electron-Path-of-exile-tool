@@ -10,7 +10,12 @@ export default class TradeHandler {
   public availableTradeOffers: number;
   public resultIds: string[];
   private tradeSearchDataResponse: TradeSearchDataResponse;
-  private currentResults: PoeItemResult[];
+  public currentResults: PoeItemResult[];
+  public price: number;
+  public priceForOne: number;
+  public currentResult: PoeItemResult;
+  public sellAmount: number | string;
+  public buyAmount: number | string;
 
   constructor(
     buyItemType: string,
@@ -37,10 +42,26 @@ export default class TradeHandler {
 
     console.log('currentResult: ', currentResult);
 
-    return this.generateWhisperMsg(currentResult);
+    return this.calculatePrices(currentResult);
   }
 
-  private generateWhisperMsg(itemResult: PoeItemResult): string {
+  public async prepareNextTrade(): Promise<void> {
+    if (this.currentResults.length <= 0) {
+      const nextTradeResults = await this.getNextTradeResults();
+      this.currentResults = nextTradeResults.result;
+    }
+
+    if (this.currentResults.length <= 0) {
+      this.currentResult = null;
+
+    }
+    const currentResult = this.currentResults.shift();
+    this.currentResult = currentResult;
+    this.currentResults = this.currentResults.slice(1, this.currentResults.length);
+    this.calculatePrices(this.currentResult);
+  }
+
+  private calculatePrices(itemResult: PoeItemResult): string {
     let whisper = itemResult.listing.whisper;
     let sellAmount;
     let buyAmount = 0;
@@ -68,6 +89,23 @@ export default class TradeHandler {
       buyAmount = this.minimumStock;
       sellAmount = (this.minimumStock * priceForOne).toFixed(1);
     }
+
+    this.priceForOne = priceForOne;
+    this.price = sellAmount;
+    this.sellAmount = sellAmount;
+    this.buyAmount = buyAmount;
+
+
+
+    // replace values for whisper msg
+    whisper = whisper.replace('{0}', buyAmount.toString());
+    whisper = whisper.replace('{1}', sellAmount.toString());
+
+    return whisper;
+  }
+
+  public getTradeMessage(buyAmount: number, sellAmount: number): string {
+    let whisper = this.currentResult.listing.whisper;
 
     // replace values for whisper msg
     whisper = whisper.replace('{0}', buyAmount.toString());

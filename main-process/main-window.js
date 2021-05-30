@@ -16,7 +16,7 @@ var electron_1 = require("electron");
 var electron_overlay_window_1 = require("electron-overlay-window");
 exports.createMainWindow = function (serve) {
     // Create the browser window.
-    var win = new electron_1.BrowserWindow(__assign(__assign({ maxWidth: 800, maxHeight: 600, minHeight: 250, minWidth: 300, width: 300, height: 250 }, electron_overlay_window_1.overlayWindow.WINDOW_OPTS), { webPreferences: {
+    var win = new electron_1.BrowserWindow(__assign(__assign({ maxWidth: 800, maxHeight: 600, minHeight: 500, minWidth: 300, width: 300, height: 500 }, electron_overlay_window_1.overlayWindow.WINDOW_OPTS), { webPreferences: {
             nodeIntegration: true,
             webSecurity: false,
             allowRunningInsecureContent: true,
