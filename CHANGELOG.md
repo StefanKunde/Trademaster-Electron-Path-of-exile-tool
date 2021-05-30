@@ -1,3 +1,12 @@
+## 1.6.0 (2021-05-30)
+
+* Fixed a bug where available trades was always lesser than 10 ([9ddaba4](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/9ddaba4))
+* Update README.md ([1aeeb0d](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/1aeeb0d))
+* Update README.md ([8eb3317](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/8eb3317))
+* updated changelog ([5331930](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/5331930))
+
+
+
 ## 1.5.0 (2021-05-30)
 
 * 1.5.0 ([2187f91](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/2187f91))
