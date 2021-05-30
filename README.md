@@ -1,4 +1,7 @@
 # Trademaster-Electron (Ultimatum)
+<span class="badge-patreon">
+<a href="https://www.patreon.com/poe_trademaster" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a>
+</span><br/>
 Trademaster is an overlay tool for the game Path of exile with functions to give the player better trading experience.
 
 To show the window after hiding type CommandOrControl+Q or click show option from the tray.
