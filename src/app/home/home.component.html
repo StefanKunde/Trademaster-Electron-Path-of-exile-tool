@@ -75,13 +75,16 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
+    <app-next-offer-display-select
+      [currentTradeHandler]="currentTradeHandler"
+    ></app-next-offer-display-select>
     <button
       mat-button
       color="accent"
       style="background-color: white; margin: 20px; width: 50%"
-      (click)="nextOffer()"
+      (click)="search()"
     >
-      Next offer
+      Search
     </button>
   </div>
 </div>

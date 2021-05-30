@@ -16,8 +16,8 @@ import { DisposableComponent } from '../disposable-component';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent extends DisposableComponent implements OnInit {
-  public buySummaryDefaultText = "Make your choice...";
-  public sellSummaryDefaultText = "Make your choice...";
+  public buySummaryDefaultText = "Choose...";
+  public sellSummaryDefaultText = "Choose...";
   public selectedBuyItemType: ItemType = null;
   public selectedSellItemType: ItemType = null;
   public selectedSellItem: { entry: ItemEntry, srcElement?: any } = null;
@@ -26,6 +26,7 @@ export class HomeComponent extends DisposableComponent implements OnInit {
   public showBuyIcons = false;
   public showSellIcons = false;
   public selectedLeague: LeagueData;
+  public currentTradeHandler: TradeHandler;
 
   constructor(
     private readonly itemSelectionService: ItemSelectionService,
@@ -110,27 +111,29 @@ export class HomeComponent extends DisposableComponent implements OnInit {
     }
   }
 
-  public async nextOffer(): Promise<void> {
-    let nextOffer: string;
+  public async search(): Promise<void> {
+    let tradeHandler: TradeHandler;
     if (this.cacheService.has('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id) && this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id).minimumStock === this.minimumStock) {
       console.log('has cache!');
-      const tradeHandlerCached = this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id);
-      nextOffer = await tradeHandlerCached.getNextTradeWhisper();
-      this.cacheService.set('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id, tradeHandlerCached);
+      tradeHandler = this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id);
 
       if (this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id).resultIds.length <= 0) {
         this.cacheService.remove('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id);
+        tradeHandler = null;
+      }
+
+      if (tradeHandler) {
+        await tradeHandler.prepareNextTrade();
       }
 
     } else {
       console.log('has no cache!');
       const tradeSearchDataResponse = await this.apiService.getPoeTradeSearchRequestResult(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, this.selectedLeague?.id);
-      const tradeHandler = new TradeHandler(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, tradeSearchDataResponse);
-      nextOffer = await tradeHandler.getNextTradeWhisper();
+      tradeHandler = new TradeHandler(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, tradeSearchDataResponse);
       this.cacheService.set('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id, tradeHandler);
+      await tradeHandler.prepareNextTrade();
     }
-    console.log('nextOffers: ', nextOffer);
-    this.electronService.sendTradeMessage(nextOffer);
+    this.currentTradeHandler = tradeHandler;
   }
 
   private setIconVisibility(itemType: ItemType, type: string) {

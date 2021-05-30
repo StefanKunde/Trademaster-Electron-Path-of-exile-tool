@@ -9,6 +9,7 @@ import { takeUntil } from 'rxjs/operators';
 import { DisposableComponent } from './disposable-component';
 import { LeagueData } from './core/services/api/interfaces/PoeLeagueData';
 import { UserSettings } from '../../main-process/settings/settings.interface';
+import { CacheService } from './core/services/cache/cacheService';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent extends DisposableComponent implements OnInit {
     private electronService: ElectronService,
     private translate: TranslateService,
     private apiService: ApiService,
+    private cacheService: CacheService,
     private itemSelectionService: ItemSelectionService,
     private leagueSelectionService: LeagueSelectionService,
     private router: Router
@@ -56,6 +58,12 @@ export class AppComponent extends DisposableComponent implements OnInit {
 
   public async initializeItemTypes(): Promise<void> {
     const itemTypes = await this.apiService.getPoeBulkItemData();
+    itemTypes.forEach(type => {
+      type.entries.forEach(x => {
+        // @TODO figure out how to set endless time.
+        this.cacheService.set('image', x.id, x.image, 100000);
+      });
+    });
     this.itemSelectionService.setItemTypes(itemTypes);
   }
 

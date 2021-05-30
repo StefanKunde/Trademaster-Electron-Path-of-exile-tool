@@ -1,0 +1,47 @@
+<mat-card class="next-trade-display-card" *ngIf="hasMoreResults">
+  <mat-card-subtitle fxLayoutAlign="center center">Infobox</mat-card-subtitle>
+  <mat-card-subtitle fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutGap="10px">
+      <div>Seller: {{ sellerName }}</div>
+      <div>Available: {{ sliderMaxVal }} {{ selectedBuyItem?.entry?.id }}</div>
+    </div>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+      <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center">
+        <div color="green">
+          <span> {{ sliderValue }} </span>
+          <img height="25px" width="25px" [(src)]="buyItemImage" />
+        </div>
+        <div color="red">
+          <span> {{ currentSellAmount }}</span
+          ><img height="25px" width="25px" [(src)]="sellItemImage" />
+        </div>
+      </div>
+      <div>
+        <mat-slider
+          [(min)]="sliderSteps"
+          [(max)]="sliderMaxVal"
+          [(step)]="sliderSteps"
+          [value]="sliderValue"
+          (input)="setSlidervalue($event)"
+        ></mat-slider>
+      </div>
+      <div>
+        <button mat-button color="accent" (click)="sendOffer()">
+          Send offer
+        </button>
+        <button mat-button color="accent" (click)="skipCurrentTrade()">
+          Skip
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="next-trade-display-card" *ngIf="!hasMoreResults">
+  <mat-card-subtitle fxLayoutAlign="center center">Infobox</mat-card-subtitle>
+  <mat-card-content fxLayoutAlign="center center">
+    {{ infoContent }}
+  </mat-card-content>
+</mat-card>
