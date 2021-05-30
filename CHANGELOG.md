@@ -1,5 +1,13 @@
+## <small>1.6.1 (2021-05-30)</small>
+
+* Added path level version update ([d06f7e3](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/d06f7e3))
+* Added toggle button to activate option to make the prices more cleaner ([e25c5e1](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/e25c5e1))
+
+
+
 ## 1.6.0 (2021-05-30)
 
+* 1.6.0 ([4ab4b38](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/4ab4b38))
 * Fixed a bug where available trades was always lesser than 10 ([9ddaba4](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/9ddaba4))
 * Update README.md ([1aeeb0d](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/1aeeb0d))
 * Update README.md ([8eb3317](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/8eb3317))
