@@ -24,8 +24,9 @@ Current features:
 - Buy maps (all tiers, blighted and uniques)
 
 Missing features -> under development:
-- Set max price per item
-- Add map search filter ( influences, enchantments, ...) 
+- Max price per item
+- Map search filter ( influences, enchantments, ...) 
+- Dark mode
 - Some more...
 
 This is a totaly rework and redesign with the same, new and better features for my tool (https://github.com/StefanKunde/TradeMaster_POE) with electron.
