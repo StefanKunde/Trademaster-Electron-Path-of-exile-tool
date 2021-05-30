@@ -9,6 +9,7 @@ Download here (https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile
 Current features:
 - Auto update
 - League selection
+- See and customize next trade before sending the message
 - Bulk buys/sells
 - Minimizing / resizing
 - Show app after minimize via tray or CommandOrControl+Q
