@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import Stat from '../../../pages/single/itemstat/stat';
+import { ItemEntrySearch } from '../api/interfaces/Item';
 import { ItemEntry, ItemType } from '../api/interfaces/PoeBulkItemData';
 
 @Injectable({
@@ -16,6 +17,7 @@ export class ItemSelectionService {
 
   // single subjects
   private itemSearchTextSubject$ = new BehaviorSubject<string>('');
+  private itemSearchItemEntrySubject$ = new BehaviorSubject<ItemEntrySearch>(null);
   private itemSearchStatsSubject$ = new BehaviorSubject<Stat[]>([]);
 
   // bulk obs
@@ -28,6 +30,8 @@ export class ItemSelectionService {
   // single obs
   public itemSearchText$ = this.itemSearchTextSubject$.asObservable();
   public itemSearchStats$ = this.itemSearchStatsSubject$.asObservable();
+  public itemSearchItemEntry$ = this.itemSearchItemEntrySubject$.asObservable();
+
 
   constructor() { }
 
@@ -60,6 +64,10 @@ export class ItemSelectionService {
 
   public setItemStats(stats: Stat[]): void {
     this.itemSearchStatsSubject$.next(stats);
+  }
+
+  public setItemSearchItemEntry(item: ItemEntrySearch): void {
+    this.itemSearchItemEntrySubject$.next(item);
   }
 
   public clearSingleFilter(): void {

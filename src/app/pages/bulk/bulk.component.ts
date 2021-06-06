@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import TradeHandler from '../../core/handler/trade-handler';
+import BulkTradeHandler from '../../core/handler/bulk-trade-handler';
 import { ApiService } from '../../core/services/api/apiService';
 import { ItemEntry, ItemType } from '../../core/services/api/interfaces/PoeBulkItemData';
 import { LeagueData } from '../../core/services/api/interfaces/PoeLeagueData';
@@ -25,7 +25,7 @@ export class BulkComponent extends DisposableComponent implements OnInit {
   public showBuyIcons = false;
   public showSellIcons = false;
   public selectedLeague: LeagueData;
-  public currentTradeHandler: TradeHandler;
+  public currentTradeHandler: BulkTradeHandler;
 
   constructor(
     private readonly itemSelectionService: ItemSelectionService,
@@ -110,13 +110,13 @@ export class BulkComponent extends DisposableComponent implements OnInit {
   }
 
   public async search(): Promise<void> {
-    let tradeHandler: TradeHandler;
-    if (this.cacheService.has('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id) && this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id).minimumStock === this.minimumStock) {
+    let tradeHandler: BulkTradeHandler;
+    if (this.cacheService.has('bulk_tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id) && this.cacheService.get<BulkTradeHandler>('bulk_tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id).minimumStock === this.minimumStock) {
       console.log('has cache!');
-      tradeHandler = this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id);
+      tradeHandler = this.cacheService.get<BulkTradeHandler>('bulk_tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id);
 
-      if (this.cacheService.get<TradeHandler>('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id).resultIds.length <= 0) {
-        this.cacheService.remove('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id);
+      if (this.cacheService.get<BulkTradeHandler>('bulk_tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id).resultIds.length <= 0) {
+        this.cacheService.remove('bulk_tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id);
         tradeHandler = null;
       }
 
@@ -127,8 +127,8 @@ export class BulkComponent extends DisposableComponent implements OnInit {
     } else {
       console.log('has no cache!');
       const tradeSearchDataResponse = await this.apiService.getBulkTradeSearchRequestResult(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, this.selectedLeague?.id);
-      tradeHandler = new TradeHandler(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, tradeSearchDataResponse);
-      this.cacheService.set('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id, tradeHandler);
+      tradeHandler = new BulkTradeHandler(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, tradeSearchDataResponse);
+      this.cacheService.set('bulk_tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id, tradeHandler);
       await tradeHandler.prepareNextTrade();
     }
     this.currentTradeHandler = tradeHandler;

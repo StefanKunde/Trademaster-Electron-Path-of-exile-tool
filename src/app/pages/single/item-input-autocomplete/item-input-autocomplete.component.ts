@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
+import { ItemEntrySearch } from '../../../core/services/api/interfaces/Item';
 import { ItemsService } from '../../../core/services/items-service/items-service';
 import { ItemSelectionService } from '../../../core/services/itemSelection/itemSelectionService';
 import { DisposableComponent } from '../../../disposable-component';
@@ -13,8 +14,9 @@ import { DisposableComponent } from '../../../disposable-component';
 })
 export class ItemInputAutocompleteComponent extends DisposableComponent implements OnInit {
   myControl = new FormControl();
-  options: string[] = [];
+  options: ItemEntrySearch[] = [];
   filteredOptions: Observable<string[]>;
+  selectedItem: ItemEntrySearch;
   searchValue: string;
 
   constructor(
@@ -28,10 +30,10 @@ export class ItemInputAutocompleteComponent extends DisposableComponent implemen
     this.itemsService.items$
       .pipe(takeUntil(this.disposed))
       .subscribe((items) => {
-        const optionsTmp: string[] = [];
+        const optionsTmp: ItemEntrySearch[] = [];
         items.forEach(cat => {
           cat.entries.forEach(entry => {
-            optionsTmp.push(entry.text);
+            optionsTmp.push(entry);
           });
         });
         this.options = optionsTmp;
@@ -40,8 +42,8 @@ export class ItemInputAutocompleteComponent extends DisposableComponent implemen
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         takeUntil(this.disposed),
-        tap(text => this.itemSelectionService.setItemSearchText(text)),
-        map(text => text ? this._filter(text) : this.options.slice(0, 0))
+        tap(text => text.text ? this.itemSelectionService.setItemSearchText(text.text) : this.itemSelectionService.setItemSearchText(text)),
+        map(text => text.text ? this._filter(text.text) : text ? this._filter(text) : this.options.slice(0, 0))
       );
 
     this.itemSelectionService.itemSearchText$
@@ -57,9 +59,15 @@ export class ItemInputAutocompleteComponent extends DisposableComponent implemen
     return item;
   }
 
+  public changeOption(item: ItemEntrySearch): void {
+    console.log('item: ', item);
+    this.selectedItem = item;
+    this.itemSelectionService.setItemSearchItemEntry(item);
+  }
+
   private _filter(text: string): any[] {
     const filterValue = text.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().includes(filterValue)).slice(0, 10);
+    return this.options.filter(option => option.text.toLowerCase().includes(filterValue)).slice(0, 10);
   }
 }
 

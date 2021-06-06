@@ -1,12 +1,13 @@
 export default interface SingleItemQuery {
   query: {
+    name?: string;
     status: {
       option: string; // e.x. "online"
     };
     type?: {
-      discriminator: string; // e.x. "warfortheatlas"
-      option: string; // e.x. "Burial Chambers Map"
-    };
+      discriminator?: string; // e.x. "warfortheatlas"
+      option?: string; // e.x. "Burial Chambers Map"
+    } | string;
     stats?: StatQuery[];
   };
   sort: {

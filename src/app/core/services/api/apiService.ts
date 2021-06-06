@@ -4,7 +4,7 @@ import { ItemType } from './interfaces/PoeBulkItemData';
 import { TradeSearchData, TradeSearchDataResponse } from './interfaces/PoeTradeSearchData';
 import { LeagueData } from './interfaces/PoeLeagueData';
 import { StatType } from './interfaces/PoeStatsData';
-import { Item } from './interfaces/Item';
+import { Item, ItemEntrySearch } from './interfaces/Item';
 import SingleItemQuery, { StatFilter, StatQuery } from './interfaces/single-item-query';
 import Stat from '../../../pages/single/itemstat/stat';
 
@@ -45,7 +45,7 @@ export class ApiService {
     return result;
   }
 
-  public async getSingleTradeSearchRequestResult(league: string, stats?: Stat[]): Promise<TradeSearchDataResponse> {
+  public async getSingleTradeSearchRequestResult(league: string, searchEntry?: ItemEntrySearch, stats?: Stat[]): Promise<TradeSearchDataResponse> {
     const tradeSearchRequestData: SingleItemQuery = {
       sort: {
         price: 'asc'
@@ -56,6 +56,23 @@ export class ApiService {
         }
       }
     };
+
+    // Add search query if passed
+    if (searchEntry) {
+      let type: {
+        discriminator?: string; // e.x. "warfortheatlas"
+        option?: string; // e.x. "Burial Chambers Map"
+      } | string = {};
+
+      if (searchEntry.disc) {
+        type.discriminator = searchEntry.disc;
+        type.option = searchEntry.type;
+      } else {
+        type = searchEntry.type;
+      }
+      tradeSearchRequestData.query.name = searchEntry.name;
+      tradeSearchRequestData.query.type = type;
+    }
 
     // Add stats to query if passed
     if (stats?.length > 0) {
@@ -83,7 +100,6 @@ export class ApiService {
     }
 
     const tradeSearchRequestResponse: TradeSearchDataResponse = await this.httpClient.post<TradeSearchDataResponse>(`https://www.pathofexile.com/api/trade/search/${ league }`, tradeSearchRequestData).toPromise();
-
     return tradeSearchRequestResponse;
   }
 

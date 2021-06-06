@@ -1,10 +1,10 @@
 export interface Item {
   id: string;
   label: string;
-  entries: ItemEntry[];
+  entries: ItemEntrySearch[];
 }
 
-export interface ItemEntry {
+export interface ItemEntrySearch {
   name?: string;
   type: string;
   text: string;
