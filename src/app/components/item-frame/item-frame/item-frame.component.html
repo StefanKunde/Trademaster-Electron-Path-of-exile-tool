@@ -1,0 +1,23 @@
+<ng-container>
+  <div
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    class="uniquePopup itemHeader doubleLine"
+  >
+    <div fxLayoutAlign="center center" class="itemName">
+      <span class="lc">{{ tradeItem?.item?.name | uppercase }}</span>
+    </div>
+    <div fxLayoutAlign="center center" class="itemName typeline">
+      <span class="lc">{{ tradeItem?.item?.baseType | uppercase }}</span>
+    </div>
+  </div>
+  <div class="item-content" fxLayout="column" fxLayoutAlign="center center">
+    <div class="itemLevel">
+      {{ "Item Level: " | uppercase }}
+      <span class="itemLevelValue">
+        {{ tradeItem?.item?.ilvl }}
+      </span>
+    </div>
+    <div class="splitLine"></div>
+  </div>
+</ng-container>
