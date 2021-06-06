@@ -3,8 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { ItemType } from './interfaces/PoeBulkItemData';
 import { TradeSearchData, TradeSearchDataResponse } from './interfaces/PoeTradeSearchData';
 import { LeagueData } from './interfaces/PoeLeagueData';
-import { LeagueSelectionService } from '../leagueSelection/leagueSelectionService';
-import { takeUntil } from 'rxjs/operators';
+import { StatType } from './interfaces/PoeStatsData';
+import { Item } from './interfaces/Item';
+import SingleItemQuery, { StatFilter, StatQuery } from './interfaces/single-item-query';
+import Stat from '../../../pages/single/itemstat/stat';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +31,63 @@ export class ApiService {
     }));
   }
 
-  public async getPoeTradeSearchRequestResult(buyItemType: string, sellItemType: string, minimumStock: number, league: string): Promise<TradeSearchDataResponse> {
+  public async getPoeStats(): Promise<StatType[]> {
+    const response: any = await this.httpClient.get('https://www.pathofexile.com/api/trade/data/stats').toPromise();
+    const result: StatType[] = response.result;
+
+    return result;
+  }
+
+  public async getPoeItems(): Promise<Item[]> {
+    const response: any = await this.httpClient.get('https://www.pathofexile.com/api/trade/data/items').toPromise();
+    const result: Item[] = response.result;
+
+    return result;
+  }
+
+  public async getSingleTradeSearchRequestResult(league: string, stats?: Stat[]): Promise<TradeSearchDataResponse> {
+    const tradeSearchRequestData: SingleItemQuery = {
+      sort: {
+        price: 'asc'
+      },
+      query: {
+        status: {
+          option: 'online'
+        }
+      }
+    };
+
+    // Add stats to query if passed
+    if (stats?.length > 0) {
+      const statsQuery: StatQuery = {
+        type: 'and',
+        filters: []
+      };
+      const statsFilter: StatFilter[] = [];
+      stats.forEach(x => {
+        const filter: StatFilter = {
+          disabled: false,
+          id: x.item.id,
+          value: {}
+        };
+        if (x.selectedOption) {
+          filter.value.option = x.selectedOption.id;
+        } else {
+          filter.value.min = x.min;
+          filter.value.max = x.max;
+        }
+        statsFilter.push(filter);
+      });
+      statsQuery.filters = statsFilter;
+      tradeSearchRequestData.query.stats = [statsQuery];
+    }
+
+    const tradeSearchRequestResponse: TradeSearchDataResponse = await this.httpClient.post<TradeSearchDataResponse>(`https://www.pathofexile.com/api/trade/search/${ league }`, tradeSearchRequestData).toPromise();
+
+    return tradeSearchRequestResponse;
+  }
+
+  public async getBulkTradeSearchRequestResult(buyItemType: string, sellItemType: string, minimumStock: number, league: string): Promise<TradeSearchDataResponse> {
 
     const tradeSearchRequestData: TradeSearchData = {
       exchange:

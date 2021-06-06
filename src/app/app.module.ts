@@ -13,9 +13,10 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Custom
-import { HomeModule } from './home/home.module';
+import { BulkModule } from './pages/bulk/bulk.module';
 import { AppComponent } from './app.component';
 import { SettingsModule } from './pages/settings/settings.module';
+import { SingleModule } from './pages/single/single.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -32,7 +33,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     HttpClientModule,
     CoreModule,
     SharedModule,
-    HomeModule,
+    BulkModule,
+    SingleModule,
     SettingsModule,
     AppRoutingModule,
     TranslateModule.forRoot({

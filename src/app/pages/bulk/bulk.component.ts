@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import TradeHandler from '../core/handler/trade-handler';
-import { ApiService } from '../core/services/api/apiService';
-import { ItemEntry, ItemType } from '../core/services/api/interfaces/PoeBulkItemData';
-import { LeagueData } from '../core/services/api/interfaces/PoeLeagueData';
-import { CacheService } from '../core/services/cache/cacheService';
-import { ElectronService } from '../core/services/electron/electron.service';
-import { ItemSelectionService } from '../core/services/itemSelection/itemSelectionService';
-import { LeagueSelectionService } from '../core/services/leagueSelection/leagueSelectionService';
-import { DisposableComponent } from '../disposable-component';
+import TradeHandler from '../../core/handler/trade-handler';
+import { ApiService } from '../../core/services/api/apiService';
+import { ItemEntry, ItemType } from '../../core/services/api/interfaces/PoeBulkItemData';
+import { LeagueData } from '../../core/services/api/interfaces/PoeLeagueData';
+import { CacheService } from '../../core/services/cache/cacheService';
+import { ItemSelectionService } from '../../core/services/itemSelection/itemSelectionService';
+import { LeagueSelectionService } from '../../core/services/leagueSelection/leagueSelectionService';
+import { DisposableComponent } from '../../disposable-component';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-bulk',
+  templateUrl: './bulk.component.html',
+  styleUrls: ['./bulk.component.scss']
 })
-export class HomeComponent extends DisposableComponent implements OnInit {
+export class BulkComponent extends DisposableComponent implements OnInit {
   public buySummaryDefaultText = "Choose...";
   public sellSummaryDefaultText = "Choose...";
   public selectedBuyItemType: ItemType = null;
@@ -32,7 +31,6 @@ export class HomeComponent extends DisposableComponent implements OnInit {
     private readonly itemSelectionService: ItemSelectionService,
     private readonly apiService: ApiService,
     private readonly cacheService: CacheService,
-    private readonly electronService: ElectronService,
     private readonly leagueSelectionService: LeagueSelectionService
   ) {
     super();
@@ -128,7 +126,7 @@ export class HomeComponent extends DisposableComponent implements OnInit {
 
     } else {
       console.log('has no cache!');
-      const tradeSearchDataResponse = await this.apiService.getPoeTradeSearchRequestResult(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, this.selectedLeague?.id);
+      const tradeSearchDataResponse = await this.apiService.getBulkTradeSearchRequestResult(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, this.selectedLeague?.id);
       tradeHandler = new TradeHandler(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, tradeSearchDataResponse);
       this.cacheService.set('tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id, tradeHandler);
       await tradeHandler.prepareNextTrade();

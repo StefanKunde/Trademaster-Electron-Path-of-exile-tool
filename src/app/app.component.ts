@@ -10,6 +10,8 @@ import { DisposableComponent } from './disposable-component';
 import { LeagueData } from './core/services/api/interfaces/PoeLeagueData';
 import { UserSettings } from '../../main-process/settings/settings.interface';
 import { CacheService } from './core/services/cache/cacheService';
+import { ItemStatsService } from './core/services/item-stats-service/item-stats-service';
+import { ItemsService } from './core/services/items-service/items-service';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +25,8 @@ export class AppComponent extends DisposableComponent implements OnInit {
     private apiService: ApiService,
     private cacheService: CacheService,
     private itemSelectionService: ItemSelectionService,
+    private itemStatsService: ItemStatsService,
+    private itemsService: ItemsService,
     private leagueSelectionService: LeagueSelectionService,
     private router: Router
   ) {
@@ -32,6 +36,8 @@ export class AppComponent extends DisposableComponent implements OnInit {
   ngOnInit(): void {
     this.initializeLeagues();
     this.initializeItemTypes();
+    this.initializeItemStats();
+    this.initializeItems();
 
     this.electronService.loadedSettings$
       .pipe(takeUntil(this.disposed))
@@ -49,7 +55,7 @@ export class AppComponent extends DisposableComponent implements OnInit {
   }
 
   public showHomePage(): void {
-    this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('home/bulk');
   }
 
   public showSettingsPage(): void {
@@ -65,6 +71,18 @@ export class AppComponent extends DisposableComponent implements OnInit {
       });
     });
     this.itemSelectionService.setItemTypes(itemTypes);
+  }
+
+  public async initializeItemStats(): Promise<void> {
+    const itemStats = await this.apiService.getPoeStats();
+    console.log('itemStats: ', itemStats);
+    this.itemStatsService.seItemStats(itemStats);
+  }
+
+  public async initializeItems(): Promise<void> {
+    const items = await this.apiService.getPoeItems();
+    console.log('items: ', items);
+    this.itemsService.seItems(items);
   }
 
   public async initializeLeagues(): Promise<void> {

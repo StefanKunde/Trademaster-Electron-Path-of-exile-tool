@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './shared/components';
-
-import { HomeRoutingModule } from './home/home-routing.module';
 import { SettingsRoutingModule } from './pages/settings/settings-routing.module';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'home' },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: 'home',
+    loadChildren: './components/tab-route/tab-route.module#TabRouteModule'
   },
   {
     path: 'settings',
@@ -24,8 +23,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    CommonModule,
     RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
-    HomeRoutingModule,
     SettingsRoutingModule
   ],
   exports: [RouterModule]
