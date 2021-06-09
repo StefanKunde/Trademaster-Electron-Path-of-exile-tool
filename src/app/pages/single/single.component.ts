@@ -3,6 +3,7 @@ import { takeUntil } from 'rxjs/operators';
 import SingleTradeHandler from '../../core/handler/single-trade-handler';
 import { ApiService } from '../../core/services/api/apiService';
 import { ItemEntrySearch } from '../../core/services/api/interfaces/Item';
+import { PoeItemResult } from '../../core/services/api/interfaces/PoeItemResult';
 import { LeagueData } from '../../core/services/api/interfaces/PoeLeagueData';
 import { StatType } from '../../core/services/api/interfaces/PoeStatsData';
 import { CacheService } from '../../core/services/cache/cacheService';
@@ -85,7 +86,8 @@ export class SingleComponent extends DisposableComponent implements OnInit {
 
   }
 
-  public nextTradeResult(): void {
-    console.log('this.tradehandler.getNextTradeWhisper() :', this.tradehandler.getNextTradeWhisper());
+  public async nextTradeResult(): Promise<void> {
+    await this.tradehandler.getNextTradeWhisper();
+    this.itemSelectionService.setCurrentTradeResultItem(this.tradehandler.currentResult);
   }
 }

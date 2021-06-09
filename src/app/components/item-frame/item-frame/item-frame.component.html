@@ -1,4 +1,5 @@
 <ng-container>
+  <!-- ### START HEADER ### -->
   <div
     fxLayout="column"
     fxLayoutAlign="center center"
@@ -11,13 +12,80 @@
       <span class="lc">{{ tradeItem?.item?.baseType | uppercase }}</span>
     </div>
   </div>
+  <!-- ### END HEADER ### -->
+
+  <!-- ### START BODY ### -->
   <div class="item-content" fxLayout="column" fxLayoutAlign="center center">
+    <!-- ### START PROPERTIES ### -->
+    <ng-container *ngFor="let prop of tradeItem?.item?.properties">
+      <div class="item-property-text">
+        {{ prop.name | uppercase }}:
+        <span class="item-property-value">
+          {{ prop.values[0][0] }}
+        </span>
+      </div>
+    </ng-container>
+    <!-- ### END PROPERTIES ### -->
+
+    <div
+      class="splitLine"
+      *ngIf="tradeItem?.item?.properties?.length > 0"
+    ></div>
+
+    <!-- ### START REQUIREMENTS ### -->
+    <span *ngIf="tradeItem?.item?.requirements?.length > 0">
+      <span *ngFor="let req of tradeItem?.item?.requirements">
+        <span class="item-requirement-text">
+          {{ req.name | uppercase }}:
+          <span class="item-requirement-value">
+            {{ req.values[0][0] }}
+          </span>
+        </span>
+      </span>
+    </span>
+    <!-- ### END PROPERTIES ### -->
+
+    <div class="splitLine"></div>
+
+    <!-- ### START ITEM LEVEL ### -->
     <div class="itemLevel">
       {{ "Item Level: " | uppercase }}
       <span class="itemLevelValue">
         {{ tradeItem?.item?.ilvl }}
       </span>
     </div>
+    <!-- ### END ITEM LEVEL ### -->
+
     <div class="splitLine"></div>
+
+    <!-- ### START EXPLICIT MODS ### -->
+    <ng-container *ngIf="tradeItem?.item?.explicitMods?.length > 0">
+      <span
+        class="explicit-mod"
+        *ngFor="let mod of tradeItem?.item?.explicitMods"
+        >{{ mod }}</span
+      >
+    </ng-container>
+    <!-- ### END EXPLICIT MODS ### -->
+
+    <!-- ### START CORRUPTED ### -->
+    <span *ngIf="tradeItem?.item?.corrupted" class="corruptedText">
+      {{ "corrupted" | uppercase }}
+    </span>
+    <!-- ### END CORRUPTED ### -->
+
+    <div
+      class="splitLine"
+      *ngIf="tradeItem?.item?.explicitMods?.length > 0"
+    ></div>
+
+    <!-- ### START PRICE LINE ### -->
+    <span *ngIf="tradeItem?.listing?.price?.type" class="buyout-line">
+      {{ tradeItem?.listing?.price.type | uppercase }}
+      {{ tradeItem?.listing?.price.amount }}
+      {{ tradeItem?.listing?.price.currency }}
+    </span>
+    <!-- ### END PRICE LINE ### -->
   </div>
+  <!-- ### END BODY ### -->
 </ng-container>

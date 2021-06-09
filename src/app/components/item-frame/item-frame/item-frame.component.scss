@@ -41,7 +41,7 @@
 
 .itemLevel {
   font-size: 10px;
-  color: #a38d6d;
+  color: #7f7f7f;
 }
 
 .itemLevelValue {
@@ -54,4 +54,42 @@
   height: 7.91075px;
   margin: 1px 0px;
   background: url(/assets/items/seperator-unique.png) center no-repeat;
+}
+
+.corruptedText {
+  color: red;
+  font-size: 10px;
+}
+
+.item-property-text {
+  font-size: 10px;
+  color: #7f7f7f;
+}
+.item-property-value {
+  font-size: 10px;
+  color: #8888ff;
+}
+
+.item-requirement-text {
+  font-size: 10px;
+  color: #7f7f7f;
+  display: inline;
+}
+
+.item-requirement-value {
+  font-size: 10px;
+  color: white;
+  display: inline;
+}
+
+.buyout-line {
+  color: #aa9e82;
+  font-size: 10px;
+}
+
+.explicit-mod {
+  font-size: 10px;
+  color: #8888ff;
+  line-height: 110%;
+  text-align: center;
 }

@@ -12,9 +12,10 @@ import { NextOfferDisplayModule } from '../../components/next-offer-display/next
 import { SingleComponent } from './single.component';
 import { ItemInputAutocompleteModule } from './item-input-autocomplete/item-input-autocomplete.module';
 import { ItemStatModule } from './itemstat/itemstat.module';
+import { ItemFrameModule } from '../../components/item-frame/item-frame/item-frame.module';
 
 @NgModule({
   declarations: [SingleComponent],
-  imports: [CommonModule, SharedModule, SingleRoutingModule, FlexLayoutModule, MatExpansionModule, MatButtonModule, MatInputModule, ItemTypeSelectModule, ItemSelectModule, NextOfferDisplayModule, ItemInputAutocompleteModule, ItemStatModule]
+  imports: [CommonModule, SharedModule, SingleRoutingModule, FlexLayoutModule, MatExpansionModule, MatButtonModule, MatInputModule, ItemTypeSelectModule, ItemSelectModule, NextOfferDisplayModule, ItemInputAutocompleteModule, ItemStatModule, ItemFrameModule]
 })
 export class SingleModule { }

@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import Stat from '../../../pages/single/itemstat/stat';
 import { ItemEntrySearch } from '../api/interfaces/Item';
 import { ItemEntry, ItemType } from '../api/interfaces/PoeBulkItemData';
+import { PoeItemResult } from '../api/interfaces/PoeItemResult';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class ItemSelectionService {
   private itemSearchTextSubject$ = new BehaviorSubject<string>('');
   private itemSearchItemEntrySubject$ = new BehaviorSubject<ItemEntrySearch>(null);
   private itemSearchStatsSubject$ = new BehaviorSubject<Stat[]>([]);
+  private itemCurrentTradeResultSubject$ = new BehaviorSubject<PoeItemResult>(null);
 
   // bulk obs
   public itemTypes$ = this.itemTypesSubject$.asObservable();
@@ -31,6 +33,7 @@ export class ItemSelectionService {
   public itemSearchText$ = this.itemSearchTextSubject$.asObservable();
   public itemSearchStats$ = this.itemSearchStatsSubject$.asObservable();
   public itemSearchItemEntry$ = this.itemSearchItemEntrySubject$.asObservable();
+  public itemCurrentTradeResult$ = this.itemCurrentTradeResultSubject$.asObservable();
 
 
   constructor() { }
@@ -68,6 +71,10 @@ export class ItemSelectionService {
 
   public setItemSearchItemEntry(item: ItemEntrySearch): void {
     this.itemSearchItemEntrySubject$.next(item);
+  }
+
+  public setCurrentTradeResultItem(item: PoeItemResult): void {
+    this.itemCurrentTradeResultSubject$.next(item);
   }
 
   public clearSingleFilter(): void {

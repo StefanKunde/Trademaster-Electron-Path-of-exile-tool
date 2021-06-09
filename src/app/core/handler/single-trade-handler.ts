@@ -21,7 +21,6 @@ export default class SingleTradeHandler {
 
   public async getNextTradeWhisper(): Promise<string> {
     if (this.currentResults.length <= 0) {
-      console.log('this.currentResults.length: ', this.currentResults.length);
       const nextTradeResults = await this.getNextTradeResults();
       this.currentResults = nextTradeResults.result;
     }
@@ -73,9 +72,5 @@ export default class SingleTradeHandler {
     this.resultIds = this.tradeSearchDataResponse.result;
     this.tradeId = this.tradeSearchDataResponse.id;
     this.availableTradeOffers = this.tradeSearchDataResponse.total;
-
-    console.log('this.resultIds: ', this.resultIds);
-    console.log('this.tradeId: ', this.tradeId);
-    console.log('this.availableTradeOffers: ', this.availableTradeOffers);
   }
 }
