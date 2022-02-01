@@ -10,21 +10,20 @@ Working on windows (tested) and mac (should, but did not test).
 Download here (https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/releases).
 
 Current features:
-- Auto update
-- League selection
-- See and customize next trade before sending the message
 - Bulk buys/sells
-- Minimizing / resizing
-- Show app after minimize via tray or CommandOrControl+Q
-- Send trademessage by button click
 - Buy currency
-- Buy prophecies
 - Buy Cards
 - Buy fossils/resos
 - Buy fragments
 - Buy scarabs
 - Buy essences
 - Buy maps (all tiers, blighted and uniques)
+- Auto update
+- League selection
+- See and customize next trade before sending the message
+- Minimizing / resizing
+- Show app after minimize via tray or CommandOrControl+Q
+- Send trademessage by button click
 
 Missing features -> under development:
 - Max price per item
