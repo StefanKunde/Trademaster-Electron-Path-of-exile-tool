@@ -1,5 +1,17 @@
+## 1.7.0 (2022-05-15)
+
+* Added single trade structure. Refactored some code. ([51a8d53](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/51a8d53))
+* Added tradehandler for single trades. Fixed missing type for searchtext. Cleaned some code parts ([8eb3e77](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/8eb3e77))
+* Extended the unique frame ([e392f75](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/e392f75))
+* Hotfixed broken searching because of missing icons from http responses after sentinel update. ([4b35387](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/4b35387))
+* made property public ([679bd3b](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/679bd3b))
+* Started adding item-frame ([8413b8e](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/8413b8e))
+
+
+
 ## <small>1.6.2 (2021-05-30)</small>
 
+* 1.6.2 ([8bf740a](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/8bf740a))
 * removed prop ([8201702](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/8201702))
 
 
