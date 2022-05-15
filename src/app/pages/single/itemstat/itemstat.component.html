@@ -1,0 +1,82 @@
+<!-- START list all stats -->
+
+<ng-container *ngFor="let stat of stats">
+  <div fxLayout="row">
+    <div fxFlex="95">
+      <div fxLayout="row" fxLayoutGap="5px">
+        <mat-form-field fxFlex="70">
+          <input disabled type="text" matInput [(value)]="stat.item.text" />
+        </mat-form-field>
+
+        <ng-container *ngIf="!stat.hasAdditionalOptions">
+          <mat-form-field fxFlex="15">
+            <mat-label>MIN</mat-label>
+            <input
+              (change)="changeInputValue($event, 'min', stat)"
+              type="text"
+              matInput
+            />
+          </mat-form-field>
+
+          <mat-form-field fxFlex="15">
+            <mat-label>MAX</mat-label>
+            <input
+              (change)="changeInputValue($event, 'max', stat)"
+              type="text"
+              matInput
+            />
+          </mat-form-field>
+        </ng-container>
+
+        <ng-container *ngIf="stat.hasAdditionalOptions">
+          <mat-form-field fxFlex="30" appearance="fill">
+            <mat-label>Select</mat-label>
+            <mat-select>
+              <ng-container *ngFor="let option of stat.item.option?.options">
+                <mat-option
+                  [(value)]="option.id"
+                  (click)="changeOption(option, stat)"
+                  >{{ option.text }}</mat-option
+                >
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+      </div>
+    </div>
+    <div fxFlex="5" fxLayoutAlign="center center">
+      <mat-icon
+        class="delte-icon"
+        aria-hidden="false"
+        (click)="deleteStat(stat)"
+        >delete</mat-icon
+      >
+    </div>
+  </div>
+</ng-container>
+
+<!-- END list all stats -->
+
+<!-- START add new stat -->
+<div fxLayout="row" fxLayoutGap="5px">
+  <mat-form-field fxFlex>
+    <mat-label>Add Stat filter...</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="myControl"
+      [matAutocomplete]="auto"
+      [(ngModel)]="searchValue"
+    />
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option
+        *ngFor="let option of filteredOptions | async"
+        [value]="option.text"
+        (click)="addNewStat(option)"
+      >
+        ({{ option.type }}) {{ option.text }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+<!-- END add new stat -->

@@ -5,10 +5,14 @@ export interface PoeItemResult {
 }
 
 export interface PoeItem {
+  name?: string;
   baseType: string;
+  extended: ItemExtended;
+  frameType: FrameType;
   descrText: string;
-  explicitMods: string[];
-  frameType: number;
+  explicitMods?: string[];
+  implicitMods?: string[];
+  sockets: ItemSocket[];
   h: number;
   w: number;
   icon: string;
@@ -20,6 +24,30 @@ export interface PoeItem {
   note: string;
   stackSize: number;
   typeLine: string;
+  properties?: ItemProperty[];
+  requirements?: ItemRequirement[];
+}
+
+export interface ItemExtended {
+  ar?: number;
+  ev?: number;
+  hashes: ItemExtendedHashes;
+}
+
+export interface ItemExtendedHashes {
+  explicit: string[];
+}
+export interface ItemProperty {
+  displayMode?: number;
+  name: string;
+  type?: number;
+  values: string[]; // first one has the value for e.x. quality
+}
+
+export interface ItemRequirement {
+  displayMode?: number;
+  name: string;
+  values: string[];
 }
 
 export interface Listing {
@@ -61,4 +89,32 @@ export interface Stash {
   name: string;
   x: number;
   y: number;
+}
+
+export interface ItemSocket {
+  group: number;
+  sColour: SocketColorType;
+  attr: string | boolean; // G, W, R, B, A. Stands for: green, white, red, blue, abyss (though not a colour but type).
+}
+
+export enum SocketColorType {
+  Green = 'G',
+  Red = 'R',
+  Blue = 'B',
+  White = 'W',
+  Abyss = 'A'
+
+}
+
+export enum FrameType {
+  Normal = 0,
+  Magic = 1,
+  Rare = 2,
+  Unique = 3,
+  Gem = 4,
+  Currency = 5,
+  Divination_Card = 6,
+  Quest_Item = 7,
+  Prophecy = 8,
+  Unique_Relict = 9
 }

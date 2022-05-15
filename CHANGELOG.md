@@ -1,5 +1,12 @@
+## <small>1.6.2 (2021-05-30)</small>
+
+* removed prop ([8201702](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/8201702))
+
+
+
 ## <small>1.6.1 (2021-05-30)</small>
 
+* 1.6.1 ([b6be823](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/b6be823))
 * Added path level version update ([d06f7e3](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/d06f7e3))
 * Added toggle button to activate option to make the prices more cleaner ([e25c5e1](https://github.com/StefanKunde/Trademaster-Electron-Path-of-exile-tool/commit/e25c5e1))
 

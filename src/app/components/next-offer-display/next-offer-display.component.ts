@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
-import TradeHandler from '../../core/handler/trade-handler';
+import BulkTradeHandler from '../../core/handler/bulk-trade-handler';
 import { ApiService } from '../../core/services/api/apiService';
 import { ItemEntry } from '../../core/services/api/interfaces/PoeBulkItemData';
 import { PoeItemResult } from '../../core/services/api/interfaces/PoeItemResult';
@@ -17,7 +17,7 @@ import { DisposableComponent } from '../../disposable-component';
   styleUrls: ['./next-offer-display.component.scss']
 })
 export class NextOfferDisplayComponent extends DisposableComponent implements OnInit {
-  @Input() currentTradeHandler: TradeHandler;
+  @Input() currentTradeHandler: BulkTradeHandler;
   public selectedSellItem: { entry: ItemEntry, srcElement?: any } = null;
   public selectedBuyItem: { entry: ItemEntry, srcElement?: any } = null;
   public selectedLeague: LeagueData;
@@ -61,7 +61,7 @@ export class NextOfferDisplayComponent extends DisposableComponent implements On
     if (this.currentTradeHandler?.resultIds?.length > 0) {
       this.hasMoreResults = true;
       currentResult = this.currentTradeHandler.currentResult;
-      this.buyItemImage = currentResult.item.icon;
+      this.buyItemImage = currentResult.item?.icon;
       this.sellItemImage = this.cacheService.get('image', currentResult.listing.price.exchange.currency);
       this.sellerName = currentResult.listing.account.lastCharacterName;
       this.currentPriceForOne = (Number(this.currentTradeHandler.buyAmount) / Number(this.currentTradeHandler.sellAmount));

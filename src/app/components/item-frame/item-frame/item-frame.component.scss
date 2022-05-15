@@ -1,0 +1,95 @@
+.uniquePopup {
+  background: url(/assets/items/header-double-unique-left.png) top left
+      no-repeat,
+    url(/assets/items/header-double-unique-right.png) top right no-repeat,
+    url(/assets/items/header-double-unique-middle.png) top center repeat-x;
+  color: #af6025;
+  text-align: center;
+}
+
+.itemHeader {
+  width: 80%;
+  height: 33px;
+}
+
+.doubleLine {
+  height: 53px;
+}
+
+.itemName {
+  position: relative;
+  font-size: 14px;
+  line-height: 1em;
+  height: 100%;
+  width: 100%;
+}
+
+.typeline {
+  padding: 2.59162px 30px 6.18323px 30px;
+}
+
+.lc {
+  padding: 5.18323px 30px 0 30px;
+}
+
+.item-content {
+  padding: 0.4em 0em 0.5em 0em;
+  background-color: rgba($color: #000000, $alpha: 0.95);
+  width: 79.65%;
+  margin-left: 1px;
+}
+
+.itemLevel {
+  font-size: 10px;
+  color: #7f7f7f;
+}
+
+.itemLevelValue {
+  font-size: 10px;
+  color: white;
+}
+
+.splitLine {
+  min-width: 40%;
+  height: 7.91075px;
+  margin: 1px 0px;
+  background: url(/assets/items/seperator-unique.png) center no-repeat;
+}
+
+.corruptedText {
+  color: red;
+  font-size: 10px;
+}
+
+.item-property-text {
+  font-size: 10px;
+  color: #7f7f7f;
+}
+.item-property-value {
+  font-size: 10px;
+  color: #8888ff;
+}
+
+.item-requirement-text {
+  font-size: 10px;
+  color: #7f7f7f;
+  display: inline;
+}
+
+.item-requirement-value {
+  font-size: 10px;
+  color: white;
+  display: inline;
+}
+
+.buyout-line {
+  color: #aa9e82;
+  font-size: 10px;
+}
+
+.explicit-mod {
+  font-size: 10px;
+  color: #8888ff;
+  line-height: 110%;
+  text-align: center;
+}

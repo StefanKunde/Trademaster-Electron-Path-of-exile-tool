@@ -1,6 +1,7 @@
 
 export interface TradeSearchDataResponse {
   id: string;
+  complexity?: number;
   result: string[];
   total: number;
 }
