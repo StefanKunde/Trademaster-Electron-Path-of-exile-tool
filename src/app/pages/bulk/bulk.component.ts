@@ -127,6 +127,7 @@ export class BulkComponent extends DisposableComponent implements OnInit {
     } else {
       console.log('has no cache!');
       const tradeSearchDataResponse = await this.apiService.getBulkTradeSearchRequestResult(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, this.selectedLeague?.id);
+      console.log('tradeSearchDataResponse: with has no cache: ', tradeSearchDataResponse);
       tradeHandler = new BulkTradeHandler(this.selectedBuyItem.entry.id, this.selectedSellItem.entry.id, this.minimumStock, tradeSearchDataResponse);
       this.cacheService.set('bulk_tradehandler', this.selectedBuyItem.entry.id + this.selectedSellItem.entry.id + this.selectedLeague?.id, tradeHandler);
       await tradeHandler.prepareNextTrade();

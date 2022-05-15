@@ -120,11 +120,13 @@ export class ApiService {
 
     const tradeSearchRequestResponse: TradeSearchDataResponse = await this.httpClient.post<TradeSearchDataResponse>(`https://www.pathofexile.com/api/trade/exchange/${ league }`, tradeSearchRequestData).toPromise();
 
+    console.log('tradeSearchRequestResponse from getBulkTradeSearchRequestResult: ', tradeSearchRequestResponse);
     return tradeSearchRequestResponse;
   }
 
   public async getFinalTradeSearchResult(query: string): Promise<any> {
     const finalTradeSearchResponse: any = await this.httpClient.get<any>(`https://www.pathofexile.com/api/trade/fetch/${ query }`).toPromise();
+    console.log('finalTradeSearchResponse from getFinalTradeSearchResult: ', finalTradeSearchResponse);
     return finalTradeSearchResponse;
   }
 

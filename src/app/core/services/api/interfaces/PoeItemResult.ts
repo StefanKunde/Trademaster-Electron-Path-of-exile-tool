@@ -7,7 +7,7 @@ export interface PoeItemResult {
 export interface PoeItem {
   name?: string;
   baseType: string;
-  extended: any[];
+  extended: ItemExtended;
   frameType: FrameType;
   descrText: string;
   explicitMods?: string[];
@@ -28,6 +28,15 @@ export interface PoeItem {
   requirements?: ItemRequirement[];
 }
 
+export interface ItemExtended {
+  ar?: number;
+  ev?: number;
+  hashes: ItemExtendedHashes;
+}
+
+export interface ItemExtendedHashes {
+  explicit: string[];
+}
 export interface ItemProperty {
   displayMode?: number;
   name: string;

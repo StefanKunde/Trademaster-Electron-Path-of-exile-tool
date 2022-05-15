@@ -61,7 +61,7 @@ export class NextOfferDisplayComponent extends DisposableComponent implements On
     if (this.currentTradeHandler?.resultIds?.length > 0) {
       this.hasMoreResults = true;
       currentResult = this.currentTradeHandler.currentResult;
-      this.buyItemImage = currentResult.item.icon;
+      this.buyItemImage = currentResult.item?.icon;
       this.sellItemImage = this.cacheService.get('image', currentResult.listing.price.exchange.currency);
       this.sellerName = currentResult.listing.account.lastCharacterName;
       this.currentPriceForOne = (Number(this.currentTradeHandler.buyAmount) / Number(this.currentTradeHandler.sellAmount));
