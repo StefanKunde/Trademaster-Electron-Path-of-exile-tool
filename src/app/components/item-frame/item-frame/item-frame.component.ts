@@ -12,7 +12,7 @@ import { DisposableComponent } from '../../../disposable-component';
   styleUrls: ['./item-frame.component.scss']
 })
 export class ItemFrameComponent extends DisposableComponent implements OnInit {
-  private tradeItem: PoeItemResult;
+  public tradeItem: PoeItemResult;
   public frameLeftSrc: string;
   public frameMidSrc: string;
   public frameRightSrc: string;
