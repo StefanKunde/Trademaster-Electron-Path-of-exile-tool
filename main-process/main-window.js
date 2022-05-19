@@ -21,7 +21,6 @@ exports.createMainWindow = function (serve) {
             webSecurity: false,
             allowRunningInsecureContent: true,
             contextIsolation: false,
-            enableRemoteModule: true // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular)
         } }));
     if (serve) {
         require('electron-reload')(__dirname, {

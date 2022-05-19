@@ -51,6 +51,10 @@ export default class TradeHandler {
 
     const currentResult = this.currentResults.shift();
     this.currentResult = currentResult;
+    console.log('testarray: ', [{ 'hello1': '23' }]);
+    console.log('type of testarray: ', typeof [{ 'hello1': '23' }]);
+    console.log('this.resultIds: ', this.resultIds);
+    console.log('type of this.resultIds: ', typeof this.resultIds);
     this.resultIds = this.resultIds.slice(1, this.resultIds.length);
     this.calculatePrices(this.currentResult);
   }
@@ -137,7 +141,7 @@ export default class TradeHandler {
   }
 
   private initialize(): void {
-    this.resultIds = this.tradeSearchDataResponse.result;
+    this.resultIds = Object.keys(this.tradeSearchDataResponse.result);
     this.tradeId = this.tradeSearchDataResponse.id;
     this.availableTradeOffers = this.tradeSearchDataResponse.total;
   }

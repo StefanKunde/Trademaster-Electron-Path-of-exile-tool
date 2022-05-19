@@ -7,6 +7,7 @@ import { PoeItemResult } from '../../core/services/api/interfaces/PoeItemResult'
 import { LeagueData } from '../../core/services/api/interfaces/PoeLeagueData';
 import { StatType } from '../../core/services/api/interfaces/PoeStatsData';
 import { CacheService } from '../../core/services/cache/cacheService';
+import { ElectronService } from '../../core/services/electron/electron.service';
 import { ItemStatsService } from '../../core/services/item-stats-service/item-stats-service';
 import { ItemSelectionService } from '../../core/services/itemSelection/itemSelectionService';
 import { LeagueSelectionService } from '../../core/services/leagueSelection/leagueSelectionService';
@@ -31,7 +32,6 @@ export class SingleComponent extends DisposableComponent implements OnInit {
     private readonly itemSelectionService: ItemSelectionService,
     private readonly apiService: ApiService,
     private readonly leagueSelectionService: LeagueSelectionService,
-    private readonly cacheService: CacheService
   ) {
     super();
   }

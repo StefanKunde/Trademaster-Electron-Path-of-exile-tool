@@ -7,7 +7,18 @@ export interface TradeSearchDataResponse {
 }
 
 export interface TradeSearchData {
-  exchange: Exchange;
+  engine: string;
+  query: {
+    have: string[];
+    want: string[];
+    status: {
+      option: string;
+    },
+    minimum?: number;
+  };
+  sort: {
+    have: string;
+  }
 }
 
 interface Exchange {

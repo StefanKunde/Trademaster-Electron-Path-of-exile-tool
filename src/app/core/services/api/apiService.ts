@@ -106,15 +106,17 @@ export class ApiService {
   public async getBulkTradeSearchRequestResult(buyItemType: string, sellItemType: string, minimumStock: number, league: string): Promise<TradeSearchDataResponse> {
 
     const tradeSearchRequestData: TradeSearchData = {
-      exchange:
-      {
-        status:
-        {
-          option: "online"
-        },
+      engine: 'new',
+      query: {
         have: [sellItemType],
         want: [buyItemType],
+        status: {
+          option: 'online'
+        },
         minimum: minimumStock
+      },
+      sort: {
+        have: 'asc'
       }
     };
 

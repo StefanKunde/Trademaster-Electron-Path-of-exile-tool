@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { FrameType, PoeItemResult } from '../../../core/services/api/interfaces/PoeItemResult';
 import { StatType } from '../../../core/services/api/interfaces/PoeStatsData';
+import { ElectronService } from '../../../core/services/electron/electron.service';
 import { ItemStatsService } from '../../../core/services/item-stats-service/item-stats-service';
 import { ItemSelectionService } from '../../../core/services/itemSelection/itemSelectionService';
 import { DisposableComponent } from '../../../disposable-component';
@@ -20,7 +21,7 @@ export class ItemFrameComponent extends DisposableComponent implements OnInit {
 
 
   constructor(
-    private readonly itemSelectionService: ItemSelectionService, private readonly itemStatsService: ItemStatsService) {
+    private readonly itemSelectionService: ItemSelectionService, private readonly itemStatsService: ItemStatsService, private readonly electronService: ElectronService) {
     super();
   }
 
@@ -88,5 +89,17 @@ export class ItemFrameComponent extends DisposableComponent implements OnInit {
       default:
         console.log('default reached... :(');
     }
+  }
+
+  public async sendMessage() {
+    console.log('clicked sendMessage');
+    //const msg = (await this.itemSelectionService.itemCurrentTradeResult$.toPromise()).listing.whisper;
+
+    const msg = this.tradeItem.listing.whisper;
+
+    console.log('message: ', msg);
+    await this.electronService.sendTradeMessage(msg);
+
+
   }
 }

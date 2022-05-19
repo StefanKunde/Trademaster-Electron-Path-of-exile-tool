@@ -25,9 +25,10 @@
           <div *ngIf="selectedBuyItemType && showBuyIcons">
             <span *ngFor="let entry of selectedBuyItemType.entries">
               <img
+                *ngIf="entry"
                 class="item-icon-images"
-                [src]="entry.image"
-                [title]="entry.text"
+                [src]="entry?.image"
+                [title]="entry?.text"
                 style="
                   max-width: 40px;
                   min-width: 40px;
@@ -60,8 +61,8 @@
             <span *ngFor="let entry of selectedSellItemType.entries">
               <img
                 class="item-icon-images"
-                [src]="entry.image"
-                [title]="entry.text"
+                [src]="entry?.image"
+                [title]="entry?.text"
                 style="
                   max-width: 40px;
                   min-width: 40px;
