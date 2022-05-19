@@ -92,14 +92,8 @@ export class ItemFrameComponent extends DisposableComponent implements OnInit {
   }
 
   public async sendMessage() {
-    console.log('clicked sendMessage');
-    //const msg = (await this.itemSelectionService.itemCurrentTradeResult$.toPromise()).listing.whisper;
-
     const msg = this.tradeItem.listing.whisper;
-
-    console.log('message: ', msg);
     await this.electronService.sendTradeMessage(msg);
-
-
   }
+
 }

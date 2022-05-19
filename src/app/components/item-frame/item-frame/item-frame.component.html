@@ -17,6 +17,14 @@
   <!-- ### START BODY ### -->
   <div class="item-content" fxLayout="column" fxLayoutAlign="center center">
     <!-- ### START PROPERTIES ### -->
+    <div style="color: red" *ngIf="tradeItem?.item?.corrupted">Corrupted</div>
+    <!-- ### START PRICE LINE ### -->
+    <span *ngIf="tradeItem?.listing?.price?.type" class="buyout-line">
+      {{ tradeItem?.listing?.price.type | uppercase }}
+      {{ tradeItem?.listing?.price.amount }}
+      {{ tradeItem?.listing?.price.currency }}
+    </span>
+    <!-- ### END PRICE LINE ### -->
     <ng-container *ngFor="let prop of tradeItem?.item?.properties">
       <div class="item-property-text">
         {{ prop.name | uppercase }}:
@@ -78,14 +86,6 @@
       class="splitLine"
       *ngIf="tradeItem?.item?.explicitMods?.length > 0"
     ></div>
-
-    <!-- ### START PRICE LINE ### -->
-    <span *ngIf="tradeItem?.listing?.price?.type" class="buyout-line">
-      {{ tradeItem?.listing?.price.type | uppercase }}
-      {{ tradeItem?.listing?.price.amount }}
-      {{ tradeItem?.listing?.price.currency }}
-    </span>
-    <!-- ### END PRICE LINE ### -->
   </div>
 
   <button (click)="sendMessage()">Send Offer</button>
